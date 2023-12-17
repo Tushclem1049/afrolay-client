@@ -14,7 +14,6 @@ export const AuthInitState: TAuth = {
     loading: false,
     error: false,
     errorMessage: null,
-    successMessage: null,
     success: false,
   },
 };
