@@ -3,12 +3,16 @@ import { useAuth } from "../../../sdk";
 
 export const RequireAuth = () => {
   const {
-    authStore: { auth },
+    authStore: {
+      auth: {
+        data: { username: user },
+      },
+    },
   } = useAuth();
 
   const location = useLocation();
 
-  return true ? (
+  return user ? (
     <Outlet />
   ) : (
     <Navigate to="auth/sign-in" state={{ from: location }} replace />

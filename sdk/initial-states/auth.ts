@@ -2,9 +2,11 @@ import { TAuth } from "../../sdk";
 
 export const AuthInitState: TAuth = {
   auth: {
-    user: "",
-    email: "",
-    imgUrl: "",
+    data: {
+      username: "",
+      email: "",
+      avatar: "",
+    },
     accessToken: "",
   },
 
@@ -12,6 +14,7 @@ export const AuthInitState: TAuth = {
     loading: false,
     error: false,
     errorMessage: null,
+    successMessage: null,
     success: false,
   },
 };

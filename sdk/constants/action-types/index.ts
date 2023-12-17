@@ -1,6 +1,7 @@
-// Auth actions
+/** Auth actions */
 export const enum AuthActions {
   SET_AUTH,
-  FETCHING_AUTH_DATA,
+  START_LOADING,
   SET_ERROR,
+  END_LOADING,
 }

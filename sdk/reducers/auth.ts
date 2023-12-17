@@ -4,7 +4,7 @@ export const authReducer = (authState: TAuth, action: TAuthAction): TAuth => {
   const { type, payload } = action;
 
   switch (type) {
-    case AuthActions.FETCHING_AUTH_DATA:
+    case AuthActions.START_LOADING:
       return {
         ...authState,
         state: {
@@ -30,8 +30,6 @@ export const authReducer = (authState: TAuth, action: TAuthAction): TAuth => {
       };
 
     case AuthActions.SET_ERROR:
-      if (!payload) throw new Error("Provide an error message");
-
       return {
         ...authState,
         state: {
@@ -40,6 +38,15 @@ export const authReducer = (authState: TAuth, action: TAuthAction): TAuth => {
           loading: false,
           success: false,
           errorMessage: payload,
+        },
+      };
+
+    case AuthActions.END_LOADING:
+      return {
+        ...authState,
+        state: {
+          ...authState.state,
+          loading: false,
         },
       };
 

@@ -65,16 +65,3 @@ const SignInPage = () => {
 };
 
 export default SignInPage;
-
-{
-  /* <div className="hidden sm:flex bg-sky-700 flex-1 bg-cover bg-center bg-no-repeat bg-gradient-to-br from-black to-white sign-in-gradient flex-col items-center justify-center p-4">
-  <div className="p-4 rounded-2xl bg-black/25 shadow-md px-8 backdrop-blur-md border border-slate-100/25">
-    <h2 className="font-bold text-3xl md:text-5xl lg:text-6xl text-white text-center">
-      Dashboard.
-    </h2>
-  </div>
-  <p className="text-yellow-300 mt-1 text-sm text-center italic">
-    The best plans begin on a board... Be in charge today!
-  </p>
-</div> */
-}

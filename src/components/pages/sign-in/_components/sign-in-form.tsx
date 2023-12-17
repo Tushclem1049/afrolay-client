@@ -1,8 +1,12 @@
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Mail, EyeOff, Eye, Loader2 } from "lucide-react";
 import { Link } from "react-router-dom";
+
+import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
+
 import { useAuth } from "../../../../../sdk";
+import { useSignInForm } from "../lib";
 
 export const SignInForm = () => {
   const [isVisible, setisVisible] = useState(false);
@@ -22,8 +26,19 @@ export const SignInForm = () => {
     },
   } = useAuth();
 
+  const formik = useSignInForm();
+
+  const [persist, setPersist] = useState(false);
+  const togglePersist = () => {
+    setPersist((current) => !current);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("persist", JSON.stringify(persist));
+  }, [persist]);
+
   return (
-    <form className="flex flex-col gap-4">
+    <form className="flex flex-col gap-4" onSubmit={formik.handleSubmit}>
       <div>
         <p className="relative bg-slate-100 pr-10">
           <span className="absolute right-0 bottom-1/2 transform translate-y-1/2 grid place-items-center w-10 bg-orange-400 h-full">
@@ -34,8 +49,17 @@ export const SignInForm = () => {
             name="email"
             id="email"
             autoComplete="on"
-            className="w-full p-2 text-sm border-none bg-transparent outline-none"
-            placeholder="Your_email@example.com"
+            className={cn(
+              "w-full p-2 text-sm border-none bg-transparent outline-none",
+              formik.touched.email &&
+                formik.errors.email &&
+                "ring-2 ring-red-800"
+            )}
+            placeholder="Email@example.com"
+            required
+            aria-required
+            value={formik.values.email}
+            onChange={formik.handleChange}
           />
         </p>
       </div>
@@ -60,9 +84,18 @@ export const SignInForm = () => {
             name="password"
             id="password"
             autoComplete="on"
-            className="w-full p-2 text-sm border-none bg-transparent outline-none"
+            className={cn(
+              "w-full p-2 text-sm border-none bg-transparent outline-none",
+              formik.touched.password &&
+                formik.errors.password &&
+                "ring-2 ring-red-800"
+            )}
             placeholder="Your password"
             ref={passwordInputRef}
+            required
+            aria-required
+            value={formik.values.password}
+            onChange={formik.handleChange}
           />
         </p>
       </div>
@@ -72,7 +105,8 @@ export const SignInForm = () => {
             type="checkbox"
             name="rememberMe"
             id="rememberMe"
-            className=""
+            checked={persist}
+            onChange={togglePersist}
           />
           <label htmlFor="rememberMe" className="cursor-pointer text-[14px]">
             Remember me
@@ -89,10 +123,14 @@ export const SignInForm = () => {
       </div>
       <div>
         <Button
-          className="w-full rounded-none bg-orange-400/75 hover:bg-orange-400 disabled:cursor-not-allowed disabled:bg-orange-400"
+          className={cn(
+            "w-full rounded-none bg-orange-400/75 hover:bg-orange-400 disabled:cursor-not-allowed disabled:bg-orange-400",
+            loading && "bg-orange-400"
+          )}
           disabled={loading}
+          type="submit"
         >
-          {loading ? <Loader2 /> : <span>Login</span>}
+          {loading ? <Loader2 className="animate-spin" /> : <span>Login</span>}
         </Button>
       </div>
     </form>

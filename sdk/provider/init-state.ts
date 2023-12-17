@@ -3,9 +3,7 @@ import { TAuthContext } from "../../sdk";
 export const AuthProviderInitState: TAuthContext = {
   authStore: {
     auth: {
-      user: "Somto",
-      email: "",
-      imgUrl: "",
+      data: { email: "", username: "", avatar: "" },
       accessToken: "",
     },
 
@@ -16,5 +14,9 @@ export const AuthProviderInitState: TAuthContext = {
       success: false,
     },
   },
+
+  persistLogin: false,
+
   authDispatch: () => null,
+  setPersistLogin: () => null,
 };
