@@ -1,7 +1,22 @@
-import { AuthInitState, TAuthContext } from "../../sdk";
+import { TAuthContext } from "../../sdk";
 
 export const AuthProviderInitState: TAuthContext = {
-  authStore: AuthInitState,
+  authStore: {
+    authProfile: {
+      username: "",
+      email: "",
+      avatar: "",
+    },
+
+    accessToken: "",
+
+    state: {
+      loading: false,
+      error: false,
+      errorMessage: null,
+      success: false,
+    },
+  },
   persistLogin: false,
   authDispatch: () => null,
   setPersistLogin: () => null,
