@@ -15,12 +15,42 @@ export const authReducer = (authState: TAuth, action: TAuthAction): TAuth => {
         },
       };
 
-    case AuthActions.SET_AUTH:
-      if (!payload) throw new Error("Provide a valid auth data");
+    case AuthActions.SET_TOKEN:
+      if (!payload) alert("Provide an access token");
 
       return {
         ...authState,
-        auth: payload,
+        accessToken: payload,
+        state: {
+          ...authState.state,
+          error: false,
+          loading: false,
+          success: true,
+        },
+      };
+
+    case AuthActions.SET_AUTH_PROFILE:
+      if (!payload) alert("Provide a valid auth data");
+
+      return {
+        ...authState,
+        authProfile: payload,
+        state: {
+          ...authState.state,
+          error: false,
+          loading: false,
+          success: true,
+        },
+      };
+
+    case AuthActions.SET_AUTH:
+      if (!payload || !payload.profile || !payload.token)
+        alert("Provide 'profile' and 'token' data");
+
+      return {
+        ...authState,
+        authProfile: payload.profile,
+        accessToken: payload.token,
         state: {
           ...authState.state,
           error: false,

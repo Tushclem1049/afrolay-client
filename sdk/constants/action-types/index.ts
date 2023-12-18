@@ -4,4 +4,6 @@ export const enum AuthActions {
   START_LOADING,
   SET_ERROR,
   END_LOADING,
+  SET_AUTH_PROFILE,
+  SET_TOKEN,
 }

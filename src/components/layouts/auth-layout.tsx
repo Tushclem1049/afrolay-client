@@ -1,13 +1,13 @@
 import { Outlet } from "react-router-dom";
 import { Toaster } from "sonner";
 
-const DashBoardLayout = () => {
+const AuthLayout = () => {
   return (
-    <div>
+    <>
       <Toaster expand={true} closeButton={true} position="top-center" />
       <Outlet />
-    </div>
+    </>
   );
 };
 
-export default DashBoardLayout;
+export default AuthLayout;

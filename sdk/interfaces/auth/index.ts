@@ -7,10 +7,8 @@ interface Profile {
 }
 
 export type TAuth = {
-  auth: {
-    data: Profile;
-    accessToken: string;
-  };
+  authProfile: Profile;
+  accessToken: string;
 
   state: {
     loading: boolean;

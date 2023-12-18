@@ -1,4 +1,4 @@
-import { ReactNode, useReducer, useState } from "react";
+import { ReactNode, useEffect, useReducer, useState } from "react";
 import { AuthContext } from "./context";
 import { AuthInitState, authReducer } from "../../sdk";
 
@@ -11,6 +11,10 @@ export const AuthProvider = ({
   const [persistLogin, setPersistLogin] = useState<boolean>(
     JSON.parse(localStorage.getItem("persist")!) || false
   );
+
+  useEffect(() => {
+    console.log(authStore.accessToken);
+  }, [authStore]);
 
   return (
     <AuthContext.Provider
