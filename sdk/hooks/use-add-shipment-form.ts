@@ -5,8 +5,8 @@ import {
   useEffect,
   useState,
 } from "react";
-import toast from "react-hot-toast";
-import { useNavigate } from "react-router-dom";
+// import toast from "react-hot-toast";
+// import { useNavigate } from "react-router-dom";
 
 import {
   ShipmentErrors,
@@ -15,7 +15,6 @@ import {
   generateRandomNumbers,
   shipmentEventInitState,
   shipmentInitState,
-  shipmentRequest,
   useShipmentInputsValidation,
 } from "../../sdk";
 
@@ -259,36 +258,36 @@ export const useAddShipForm = () => {
 
   // form submission state
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // handle form submission
   const handleShipmentSubmission = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    shipmentRequest
-      .post("/", shipment)
-      .then((data) => {
-        // notify UI
-        toast.success(data?.data.message, {
-          id: "shipment success",
-          duration: 6000,
-        });
-        // Reset Form
-        setShipment(shipmentInitState);
+    // shipmentRequest
+    //   .post("/", shipment)
+    //   .then((data) => {
+    //     // notify UI
+    //     toast.success(data?.data.message, {
+    //       id: "shipment success",
+    //       duration: 6000,
+    //     });
+    //     // Reset Form
+    //     setShipment(shipmentInitState);
 
-        navigate("/dashboard/shipments", { preventScrollReset: true });
-      })
-      .catch((err) => {
-        // notify UI
-        toast.error(err?.response?.data?.message, {
-          id: "shipment error",
-          duration: 6000,
-        });
-      })
-      .finally(() => {
-        setIsSubmitting(false);
-      });
+    //     navigate("/dashboard/shipments", { preventScrollReset: true });
+    //   })
+    //   .catch((err) => {
+    //     // notify UI
+    //     toast.error(err?.response?.data?.message, {
+    //       id: "shipment error",
+    //       duration: 6000,
+    //     });
+    //   })
+    //   .finally(() => {
+    //     setIsSubmitting(false);
+    //   });
   };
 
   return {

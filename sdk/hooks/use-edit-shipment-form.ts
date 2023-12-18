@@ -5,8 +5,8 @@ import {
   useCallback,
   useEffect,
 } from "react";
-import { useNavigate } from "react-router-dom";
-import toast from "react-hot-toast";
+// import { useNavigate } from "react-router-dom";
+// import toast from "react-hot-toast";
 
 import {
   ShipmentErrors,
@@ -15,7 +15,6 @@ import {
   changeToLocalDatetime,
   shipmentEventInitState,
   shipmentInitState,
-  shipmentRequest,
   useShipmentInputsValidation,
 } from "../../sdk";
 
@@ -257,7 +256,7 @@ export const useEditShipForm = (__shipment: TShipment) => {
 
   // form submission state
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   // handle form submission
   const handleShipmentUpdate = (
@@ -266,30 +265,31 @@ export const useEditShipForm = (__shipment: TShipment) => {
   ) => {
     e.preventDefault();
     setIsSubmitting(true);
+    console.log(trackingId);
 
-    shipmentRequest
-      .patch(`/${trackingId}`, shipment)
-      .then((data) => {
-        // notify UI
-        toast.success(data?.data.message, {
-          id: "shipment success",
-          duration: 6000,
-        });
-        // Reset Form
-        setShipment(shipmentInitState);
+    // shipmentRequest
+    //   .patch(`/${trackingId}`, shipment)
+    //   .then((data) => {
+    //     // notify UI
+    //     toast.success(data?.data.message, {
+    //       id: "shipment success",
+    //       duration: 6000,
+    //     });
+    //     // Reset Form
+    //     setShipment(shipmentInitState);
 
-        navigate("/dashboard/shipments", { preventScrollReset: true });
-      })
-      .catch((err) => {
-        // notify UI
-        toast.error(err?.response?.data?.message, {
-          id: "shipment error",
-          duration: 6000,
-        });
-      })
-      .finally(() => {
-        setIsSubmitting(false);
-      });
+    //     navigate("/dashboard/shipments", { preventScrollReset: true });
+    //   })
+    //   .catch((err) => {
+    //     // notify UI
+    //     toast.error(err?.response?.data?.message, {
+    //       id: "shipment error",
+    //       duration: 6000,
+    //     });
+    //   })
+    //   .finally(() => {
+    //     setIsSubmitting(false);
+    //   });
   };
 
   return {
