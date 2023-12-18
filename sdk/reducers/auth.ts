@@ -71,6 +71,20 @@ export const authReducer = (authState: TAuth, action: TAuthAction): TAuth => {
         },
       };
 
+    case AuthActions.SET_SUCCESS_MESSAGE:
+      if (!payload) alert("No success message provided");
+
+      return {
+        ...authState,
+        state: {
+          ...authState.state,
+          error: false,
+          loading: false,
+          success: true,
+          successMessage: payload,
+        },
+      };
+
     case AuthActions.END_LOADING:
       return {
         ...authState,

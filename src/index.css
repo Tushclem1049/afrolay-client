@@ -81,11 +81,13 @@ body,
   height: 100%;
 }
 
-.sign-in-gradient {
-  background: linear-gradient(
-      to top left,
-      rgba(0, 0, 0, 0.3),
-      rgba(0, 0, 0, 0.1)
-    ),
-    url("parcel.jpg") center/cover no-repeat;
+.hide-scroll {
+  -moz-appearance: textfield;
+}
+
+.hide-scroll::-webkit-inner-spin-button,
+.hide-scroll::-webkit-outer-spin-button {
+  appearance: none;
+  -webkit-appearance: none;
+  margin: 0;
 }

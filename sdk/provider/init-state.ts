@@ -14,6 +14,7 @@ export const AuthProviderInitState: TAuthContext = {
       loading: false,
       error: false,
       errorMessage: null,
+      successMessage: null,
       success: false,
     },
   },

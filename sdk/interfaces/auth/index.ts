@@ -14,6 +14,7 @@ export type TAuth = {
     loading: boolean;
     error: boolean;
     errorMessage?: string | null;
+    successMessage?: string | null;
     success: boolean;
   };
 };

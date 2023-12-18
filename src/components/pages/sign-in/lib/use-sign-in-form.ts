@@ -1,5 +1,5 @@
 import { useFormik } from "formik";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 import axios from "../../../../../sdk/api/config/index";
@@ -14,6 +14,8 @@ export interface SignInValues {
 export const useSignInForm = () => {
   const { authDispatch } = useAuth();
   const navigate = useNavigate();
+  const location = useLocation();
+  const from = location?.state.from || "/dashboard/shipment";
 
   const formik = useFormik<SignInValues>({
     initialValues: { email: "", password: "" },
@@ -26,20 +28,19 @@ export const useSignInForm = () => {
 
       try {
         const { data } = await axios.post("/auth/sign-in", payload);
-        const storePayload = {
-          data: data?.data?.user,
-          accessToken: data?.data?.accessToken,
-        };
-        authDispatch({ type: AuthActions.SET_AUTH, payload: storePayload });
-        toast.success(data?.message);
+
         authDispatch({
-          type: AuthActions.END_LOADING,
+          type: AuthActions.SET_AUTH,
+          payload: {
+            profile: data?.data?.user,
+            token: data?.data?.accessToken,
+          },
         });
+        toast.success(data?.message);
 
         fn.resetForm();
-
         // redirect to dashboard
-        navigate("/dashboard/shipment");
+        navigate(from, { preventScrollReset: true, replace: true });
       } catch (error: any) {
         toast.error(error?.response?.data?.message);
 
