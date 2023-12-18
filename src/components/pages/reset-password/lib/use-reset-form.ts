@@ -1,34 +1,38 @@
-import { useFormik } from "formik";
 import { useLocation, useNavigate } from "react-router-dom";
+import { useFormik } from "formik";
 import { toast } from "sonner";
 
+import { validateResetForm } from "./validation";
 import axios from "../../../../../sdk/api/config/index";
 import { AuthActions, useAuth } from "../../../../../sdk";
-import { validateSignIn } from "./validation";
 
-export interface SignInValues {
-  password: string;
-  email: string;
+export interface ResetPayload {
+  newPassword: string;
+  confirmPassword: string;
 }
 
-export const useSignInForm = () => {
+export const useResetForm = () => {
   const { authDispatch } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location?.state?.from || "/dashboard/shipment";
 
-  const formik = useFormik<SignInValues>({
-    initialValues: { email: "", password: "" },
-    validate: validateSignIn,
+  const formik = useFormik<ResetPayload>({
+    initialValues: {
+      newPassword: "",
+      confirmPassword: "",
+    },
+    validate: validateResetForm,
     validateOnChange: false,
 
     onSubmit: async (values, fn) => {
-      const payload = { email: values.email, password: values.password };
       authDispatch({ type: AuthActions.START_LOADING });
+      const token = JSON.parse(localStorage.getItem("reset_token")!);
 
       try {
-        const { data } = await axios.post("/auth/sign-in", payload);
-
+        const { data } = await axios.patch("/forgot-password", values, {
+          headers: { Authorization: `Bearer ${token}` },
+        });
         authDispatch({
           type: AuthActions.SET_AUTH,
           payload: {
@@ -37,6 +41,8 @@ export const useSignInForm = () => {
           },
         });
         toast.success(data?.message);
+        localStorage.removeItem("reset_token");
+        localStorage.removeItem("otp_msg");
 
         fn.resetForm();
         // redirect to dashboard

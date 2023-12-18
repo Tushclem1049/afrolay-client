@@ -25,10 +25,10 @@ export const validateEmail = (values: ResetPayload) => {
  * @returns Validation errors
  */
 export const validateOtp = (values: OtpPayload) => {
-  const errors: Partial<OtpPayload> = {};
+  const errors: { otp: string } = { otp: "" };
 
   if (!values.otp) {
-    errors.otp = toast.error("Enter the OTP sent to your email") as number;
+    errors.otp = toast.error("Enter the OTP sent to your email") as string;
   }
 
   return errors;

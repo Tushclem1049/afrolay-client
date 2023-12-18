@@ -26,7 +26,7 @@ export const useSignUpForm = () => {
     validateOnChange: false,
 
     onSubmit: async (values, fn) => {
-      authDispatch({ type: AuthActions.END_LOADING });
+      authDispatch({ type: AuthActions.START_LOADING });
       const payload = {
         username: values.username,
         email: values.email,

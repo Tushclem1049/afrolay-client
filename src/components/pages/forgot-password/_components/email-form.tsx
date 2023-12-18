@@ -18,7 +18,7 @@ export const EmailForm = ({
   const formik = useEmailForm(toggleForms);
 
   return (
-    <form className="my-4 p-4 flex flex-col">
+    <form className="my-4 p-4 flex flex-col" onSubmit={formik.handleSubmit}>
       <small className="text-center text-slate-200 mb-4">
         Please enter your email address. We will send you an email with a code
         to reset your password.
@@ -48,6 +48,7 @@ export const EmailForm = ({
         <Button
           className="w-full rounded-none bg-orange-400/80 hover:bg-orange-400/90 disabled:cursor-not-allowed disabled:bg-orange-400"
           disabled={loading}
+          type="submit"
         >
           {loading ? (
             <Loader2 className="animate-spin" />

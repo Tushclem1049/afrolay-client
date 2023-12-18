@@ -14,7 +14,6 @@ function App() {
             path="account/forgot-password"
             element={<_.ForgotPassword />}
           />
-          <Route path="account/verify" element={<_.VerifyPage />} />
           <Route
             path="account/reset-password"
             element={<_.ResetPasswordPage />}

@@ -23,10 +23,10 @@ export const useEmailForm = (toggleForms: (form: "email" | "otp") => void) => {
       try {
         const { data } = await axios.post("/forgot-password", values);
 
-        localStorage.setItem("otp_msg", JSON.stringify(data?.messgae));
+        localStorage.setItem("otp_msg", JSON.stringify(data?.message));
         toast.success(data?.message);
 
-        toggleForms("otp");
+        // toggleForms("otp");
 
         fn.resetForm();
       } catch (error: any) {
@@ -35,6 +35,10 @@ export const useEmailForm = (toggleForms: (form: "email" | "otp") => void) => {
         authDispatch({
           type: AuthActions.SET_ERROR,
           payload: error?.response?.data?.message,
+        });
+      } finally {
+        authDispatch({
+          type: AuthActions.END_LOADING,
         });
       }
     },

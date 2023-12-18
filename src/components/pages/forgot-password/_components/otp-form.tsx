@@ -49,11 +49,12 @@ export const OtpForm = ({
         <Button
           className="w-full rounded-none bg-orange-400/80 hover:bg-orange-400/90 disabled:cursor-not-allowed disabled:bg-orange-400"
           disabled={loading}
+          type="submit"
         >
           {loading ? (
             <Loader2 className="animate-spin" />
           ) : (
-            <span>Let's Go</span>
+            <span>Recover</span>
           )}
         </Button>
       </div>
