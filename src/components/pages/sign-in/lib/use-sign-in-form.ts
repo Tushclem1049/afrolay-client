@@ -27,7 +27,10 @@ export const useSignInForm = () => {
       authDispatch({ type: AuthActions.START_LOADING });
 
       try {
-        const { data } = await axios.post("/auth/sign-in", payload);
+        const { data } = await axios.post("/auth/sign-in", payload, {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        });
 
         authDispatch({
           type: AuthActions.SET_AUTH,

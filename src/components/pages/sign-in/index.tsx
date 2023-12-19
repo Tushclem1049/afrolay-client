@@ -1,16 +1,13 @@
-import { useState } from "react";
-
 import { cn } from "@/lib/utils";
+
+import { useAuthForms } from "../../../../sdk";
 
 import { SignInForm } from "./_components/sign-in-form";
 import { SignUpForm } from "./_components/sign-up-form";
 
 const SignInPage = () => {
-  const [active, setActive] = useState<"login" | "sign-up">("login");
-
-  const handleClick = (tab: "login" | "sign-up") => {
-    setActive(tab);
-  };
+  const active = useAuthForms((state) => state.activeFormTab);
+  const setActiveTab = useAuthForms((state) => state.setactiveFormTab);
 
   return (
     <div
@@ -30,7 +27,7 @@ const SignInPage = () => {
                 "text-[14px] text-slate-300 w-full flex justify-center items-center cursor-pointer px-4 py-3",
                 active === "login" && "text-orange-400 cursor-default"
               )}
-              onClick={() => handleClick("login")}
+              onClick={() => setActiveTab("login")}
             >
               Login
             </p>
@@ -46,18 +43,14 @@ const SignInPage = () => {
                 "text-[14px] text-slate-300 w-full flex justify-center items-center cursor-pointer px-4 py-3",
                 active === "sign-up" && "text-orange-400 cursor-default"
               )}
-              onClick={() => handleClick("sign-up")}
+              onClick={() => setActiveTab("sign-up")}
             >
               Sign Up
             </p>
           </div>
         </div>
         <div className="w-full my-6 p-4">
-          {active === "login" ? (
-            <SignInForm />
-          ) : (
-            <SignUpForm handleClick={handleClick} />
-          )}
+          {active === "login" ? <SignInForm /> : <SignUpForm />}
         </div>
       </div>
     </div>

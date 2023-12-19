@@ -3,14 +3,11 @@ import { ArrowLeftCircle, FileDigit, Loader2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-import { useAuth } from "../../../../../sdk";
+import { useAuth, useAuthForms } from "../../../../../sdk";
+
 import { useOtpForm } from "../lib";
 
-export const OtpForm = ({
-  toggleForms,
-}: {
-  toggleForms: (form: "email" | "otp") => void;
-}) => {
+export const OtpForm = () => {
   const {
     authStore: {
       state: { loading },
@@ -18,11 +15,12 @@ export const OtpForm = ({
   } = useAuth();
 
   const message = JSON.parse(localStorage.getItem("otp_msg")!);
+  const toggleForm = useAuthForms((state) => state.setActiveForm);
 
   const formik = useOtpForm();
 
   return (
-    <form className="my-4 p-4 flex flex-col">
+    <form className="my-4 p-4 flex flex-col" onSubmit={formik.handleSubmit}>
       <small className="text-center text-slate-200 mb-4">
         {message || "Enter the 6 digit OTP that was sent to your email"}
       </small>
@@ -32,16 +30,16 @@ export const OtpForm = ({
           <FileDigit className="text-white w-5 h-5" />
         </span>
         <input
-          type="number"
+          type="text"
           name="otp"
           className={cn(
-            "w-full p-2 text-sm border-none bg-transparent outline-none text-white backdrop-blur-[4px] hide-scroll",
+            "w-full p-2 text-sm border-none bg-transparent outline-none text-white backdrop-blur-[4px]",
             formik.touched.otp && formik.errors.otp && "ring-2 ring-red-800"
           )}
           placeholder="OTP"
           required
           aria-required
-          value={formik.values.otp as number}
+          value={formik.values.otp}
           onChange={formik.handleChange}
         />
       </p>
@@ -59,15 +57,15 @@ export const OtpForm = ({
         </Button>
       </div>
 
-      <div>
-        <Button
-          className="text-muted/60 text-[12px] font-normal hover:no-underline"
-          variant={"link"}
-          onClick={() => toggleForms("email")}
+      <div className="mt-3">
+        <span
+          className="text-muted/60 text-[12px] hover:no-underline flex items-center font-medium"
+          role="button"
+          onClick={() => toggleForm("email")}
         >
           Wrong email?
           <ArrowLeftCircle className="text-muted/60 h-5 w-5 ml-1" />
-        </Button>
+        </span>
       </div>
     </form>
   );

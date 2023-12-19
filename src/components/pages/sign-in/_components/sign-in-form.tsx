@@ -124,7 +124,7 @@ export const SignInForm = () => {
       <div>
         <Button
           className={cn(
-            "w-full rounded-none bg-orange-400/75 hover:bg-orange-400 disabled:cursor-not-allowed disabled:bg-orange-400",
+            "w-full rounded-none bg-orange-400/80 hover:bg-orange-400 disabled:cursor-not-allowed disabled:bg-orange-400",
             loading && "bg-orange-400"
           )}
           disabled={loading}

@@ -1,15 +1,12 @@
-import { useState } from "react";
 import { LockKeyhole } from "lucide-react";
+
+import { useAuthForms } from "../../../../sdk";
 
 import { EmailForm } from "./_components/email-form";
 import { OtpForm } from "./_components/otp-form";
 
 const ForgotPasswordPage = () => {
-  const [active, setActive] = useState<"email" | "otp">("email");
-
-  const toggleForms = (form: "email" | "otp") => {
-    setActive(form);
-  };
+  const active = useAuthForms((state) => state.activeForm);
 
   return (
     <div
@@ -23,11 +20,7 @@ const ForgotPasswordPage = () => {
             Recovery
           </p>
         </div>
-        {active === "email" ? (
-          <EmailForm toggleForms={toggleForms} />
-        ) : (
-          <OtpForm toggleForms={toggleForms} />
-        )}
+        {active === "email" ? <EmailForm /> : <OtpForm />}
       </div>
     </div>
   );

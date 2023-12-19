@@ -27,9 +27,12 @@ export const validateEmail = (values: ResetPayload) => {
 export const validateOtp = (values: OtpPayload) => {
   const errors: { otp: string } = { otp: "" };
 
-  if (!values.otp) {
+  if (!values.otp?.trim()) {
     errors.otp = toast.error("Enter the OTP sent to your email") as string;
   }
+
+  //  else if (!/^\d+$/.test(values.otp) || values.otp !== "") {
+  // }
 
   return errors;
 };

@@ -4,14 +4,10 @@ import { Mail, EyeOff, Eye, Loader2, User2, Lock } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-import { useAuth } from "../../../../../sdk";
+import { useAuth, useAuthForms } from "../../../../../sdk";
 import { useSignUpForm } from "../lib";
 
-export const SignUpForm = ({
-  handleClick,
-}: {
-  handleClick: (tab: "login" | "sign-up") => void;
-}) => {
+export const SignUpForm = () => {
   const [isVisible, setisVisible] = useState({ nP: false, cP: false });
   const passwordInputRef = useRef<HTMLInputElement>(null);
   const cPasswordInputRef = useRef<HTMLInputElement>(null);
@@ -36,6 +32,7 @@ export const SignUpForm = ({
   } = useAuth();
 
   const formik = useSignUpForm();
+  const setActiveTab = useAuthForms((state) => state.setactiveFormTab);
 
   return (
     <form className="flex flex-col gap-4" onSubmit={formik.handleSubmit}>
@@ -157,20 +154,20 @@ export const SignUpForm = ({
         </p>
       </div>
       <div>
-        <p className="text-white text-[13px]">
+        <p className="text-white text-[13px] flex space-x-2">
           <span>Already have an account?</span>
-          <Button
-            variant="link"
+          <strong
             className=" text-orange-500"
-            onClick={() => handleClick("login")}
+            onClick={() => setActiveTab("login")}
+            role="button"
           >
             Login.
-          </Button>
+          </strong>
         </p>
       </div>
       <div>
         <Button
-          className="w-full rounded-none bg-orange-400/75 hover:bg-orange-400  disabled:cursor-not-allowed disabled:bg-orange-400"
+          className="w-full rounded-none bg-orange-400/80 hover:bg-orange-400  disabled:cursor-not-allowed disabled:bg-orange-400"
           disabled={loading}
           type="submit"
         >

@@ -1,21 +1,22 @@
+import { Link } from "react-router-dom";
+import { ArrowRightCircle, Loader2, Mail } from "lucide-react";
+
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import { Loader2, Mail } from "lucide-react";
-import { useAuth } from "../../../../../sdk";
+
+import { useAuth, useAuthForms } from "../../../../../sdk";
+
 import { useEmailForm } from "../lib";
 
-export const EmailForm = ({
-  toggleForms,
-}: {
-  toggleForms: (form: "email" | "otp") => void;
-}) => {
+export const EmailForm = () => {
   const {
     authStore: {
       state: { loading },
     },
   } = useAuth();
 
-  const formik = useEmailForm(toggleForms);
+  const formik = useEmailForm();
+  const toggleForm = useAuthForms((state) => state.setActiveForm);
 
   return (
     <form className="my-4 p-4 flex flex-col" onSubmit={formik.handleSubmit}>
@@ -31,7 +32,6 @@ export const EmailForm = ({
         <input
           type="email"
           name="email"
-          id="email"
           autoComplete="on"
           className={cn(
             "w-full p-2 text-sm border-none bg-transparent outline-none text-white backdrop-blur-[4px]",
@@ -44,6 +44,29 @@ export const EmailForm = ({
           onChange={formik.handleChange}
         />
       </p>
+      <div className="flex justify-between items-center my-4 mb-2">
+        <p className="text-white text-[12px] space-x-2">
+          <span>Already have an account?</span>
+          <Button
+            className=" text-orange-500 p-0 h-0 font-medium"
+            variant={"link"}
+            asChild
+          >
+            <Link to={"/sign-in"}>Login.</Link>
+          </Button>
+        </p>
+
+        <p className="text-white text-[12px] flex items-center">
+          <span
+            role="button"
+            className="text-muted/60 text-[12px] hover:no-underline h-0 flex items-center font-medium"
+            onClick={() => toggleForm("otp")}
+          >
+            Enter OTP
+            <ArrowRightCircle className="text-muted/60 h-5 w-5 ml-1" />
+          </span>
+        </p>
+      </div>
       <div className="mt-4">
         <Button
           className="w-full rounded-none bg-orange-400/80 hover:bg-orange-400/90 disabled:cursor-not-allowed disabled:bg-orange-400"

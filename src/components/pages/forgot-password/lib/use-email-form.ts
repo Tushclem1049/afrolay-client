@@ -2,15 +2,16 @@ import { useFormik } from "formik";
 import { toast } from "sonner";
 
 import axios from "../../../../../sdk/api/config/index";
-import { AuthActions, useAuth } from "../../../../../sdk";
+import { AuthActions, useAuth, useAuthForms } from "../../../../../sdk";
 import { validateEmail } from "./validation";
 
 export interface ResetPayload {
   email: string;
 }
 
-export const useEmailForm = (toggleForms: (form: "email" | "otp") => void) => {
+export const useEmailForm = () => {
   const { authDispatch } = useAuth();
+  const toggleForm = useAuthForms((state) => state.setActiveForm);
 
   const formik = useFormik<ResetPayload>({
     initialValues: { email: "" },
@@ -26,8 +27,7 @@ export const useEmailForm = (toggleForms: (form: "email" | "otp") => void) => {
         localStorage.setItem("otp_msg", JSON.stringify(data?.message));
         toast.success(data?.message);
 
-        // toggleForms("otp");
-
+        toggleForm("otp");
         fn.resetForm();
       } catch (error: any) {
         toast.error(error?.response?.data?.message);

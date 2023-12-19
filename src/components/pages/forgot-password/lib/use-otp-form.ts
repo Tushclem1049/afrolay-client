@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import { toast } from "sonner";
 
@@ -6,19 +7,21 @@ import { AuthActions, useAuth } from "../../../../../sdk";
 import { validateOtp } from "./validation";
 
 export interface OtpPayload {
-  otp: number | null;
+  otp: string;
 }
 
 export const useOtpForm = () => {
   const { authDispatch } = useAuth();
+  const navigate = useNavigate();
 
   const formik = useFormik<OtpPayload>({
-    initialValues: { otp: null },
+    initialValues: { otp: "" },
     validate: validateOtp,
     validateOnChange: false,
 
     onSubmit: async (values, fn) => {
       authDispatch({ type: AuthActions.START_LOADING });
+      console.log(values);
 
       try {
         const { data } = await axios.post("/verify-token", values);
@@ -31,6 +34,7 @@ export const useOtpForm = () => {
         toast.success(data?.message);
 
         fn.resetForm();
+        navigate("/account/reset-password");
       } catch (error: any) {
         toast.error(error?.response?.data?.message);
 
@@ -38,6 +42,8 @@ export const useOtpForm = () => {
           type: AuthActions.SET_ERROR,
           payload: error?.response?.data?.message,
         });
+      } finally {
+        authDispatch({ type: AuthActions.END_LOADING });
       }
     },
   });
