@@ -16,8 +16,6 @@ export const authReducer = (authState: TAuth, action: TAuthAction): TAuth => {
       };
 
     case AuthActions.SET_TOKEN:
-      if (!payload) alert("Provide an access token");
-
       return {
         ...authState,
         accessToken: payload,

@@ -5,14 +5,12 @@ import { useAuth, useRefreshToken } from "../../../sdk";
 
 export const RequireAuth = () => {
   const {
-    authStore: {
-      authProfile: { username: user },
-    },
+    authStore: { accessToken: authenticated },
   } = useAuth();
 
   const location = useLocation();
 
-  return user ? (
+  return authenticated ? (
     <Outlet />
   ) : (
     <Navigate to="sign-in" state={{ from: location }} replace />
@@ -37,11 +35,6 @@ export const PersistLogin = () => {
 
     !accessToken ? verifyRefreshToken() : setIsLoading(false);
   }, [refresh, accessToken]);
-
-  useEffect(() => {
-    console.log("[isLOADING]: ", isLoading);
-    console.log("[ACCESS TOKEN]: ", accessToken);
-  }, [isLoading, accessToken]);
 
   return <>{isLoading ? <p>Loading...</p> : <Outlet />}</>;
 };

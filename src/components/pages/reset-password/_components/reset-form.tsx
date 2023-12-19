@@ -35,7 +35,10 @@ export const ResetForm = () => {
   const formik = useResetForm();
 
   return (
-    <form className="flex flex-col gap-4" onSubmit={formik.handleSubmit}>
+    <form
+      className="my-4 p-4 flex flex-col gap-4"
+      onSubmit={formik.handleSubmit}
+    >
       <div>
         <p className="relative bg-slate-100 pr-10">
           <span className="absolute right-0 bottom-1/2 transform translate-y-1/2 grid place-items-center w-10 bg-orange-400 h-full">
@@ -109,7 +112,7 @@ export const ResetForm = () => {
       <div>
         <p className="text-white text-[13px]">
           <span>Already have an account?</span>
-          <Button variant="link" className=" text-orange-500" asChild>
+          <Button variant="link" className=" text-orange-500 h-0" asChild>
             <Link to={"/sign-in"}>Login.</Link>
           </Button>
         </p>

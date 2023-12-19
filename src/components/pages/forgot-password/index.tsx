@@ -17,7 +17,6 @@ const ForgotPasswordPage = () => {
         <div className="border-b border-slate-300/30 px-4 py-3 flex items-center justify-center">
           <p className="text-slate-200 text-xl flex items-center">
             <LockKeyhole className="text-orange-400 mr-2 h-6 w-6" />
-            Recovery
           </p>
         </div>
         {active === "email" ? <EmailForm /> : <OtpForm />}

@@ -7,7 +7,6 @@ import { TbEdit } from "react-icons/tb";
 import { useEffect, useRef, useState } from "react";
 import { CopyToClipboard } from "react-copy-to-clipboard";
 import { countries } from "countries-list";
-import toast from "react-hot-toast";
 
 import {
   TShipment,
@@ -16,6 +15,7 @@ import {
   useEditShipForm,
   useShipmentInputsValidation,
 } from "../../../sdk";
+import { toast } from "sonner";
 
 const EditShipmentForm = ({ shipment }: { shipment: TShipment }) => {
   const {

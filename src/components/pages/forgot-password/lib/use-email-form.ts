@@ -1,48 +1,52 @@
-import { useFormik } from "formik";
 import { toast } from "sonner";
 
 import axios from "../../../../../sdk/api/config/index";
 import { AuthActions, useAuth, useAuthForms } from "../../../../../sdk";
-import { validateEmail } from "./validation";
-
-export interface ResetPayload {
-  email: string;
-}
+import { FormEvent } from "react";
 
 export const useEmailForm = () => {
   const { authDispatch } = useAuth();
   const toggleForm = useAuthForms((state) => state.setActiveForm);
 
-  const formik = useFormik<ResetPayload>({
-    initialValues: { email: "" },
-    validate: validateEmail,
-    validateOnChange: false,
+  const handleSubmit = async (e: FormEvent<HTMLFormElement>, value: string) => {
+    e.preventDefault();
+    /** valiate form field */
+    if (!value?.trim()) {
+      return toast.error("Enter your email");
+    } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(value)) {
+      return toast.error("Invalid email address");
+    }
 
-    onSubmit: async (values, fn) => {
-      authDispatch({ type: AuthActions.START_LOADING });
+    /** Handle submission */
+    authDispatch({ type: AuthActions.START_LOADING });
 
-      try {
-        const { data } = await axios.post("/forgot-password", values);
+    try {
+      const { data } = await axios.post(
+        "/forgot-password",
+        { email: value },
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
 
-        localStorage.setItem("otp_msg", JSON.stringify(data?.message));
-        toast.success(data?.message);
+      localStorage.setItem("otp_msg", JSON.stringify(data?.message));
+      toast.success(data?.message);
 
-        toggleForm("otp");
-        fn.resetForm();
-      } catch (error: any) {
-        toast.error(error?.response?.data?.message);
+      toggleForm("otp");
+    } catch (error: any) {
+      toast.error(error?.response?.data?.message);
 
-        authDispatch({
-          type: AuthActions.SET_ERROR,
-          payload: error?.response?.data?.message,
-        });
-      } finally {
-        authDispatch({
-          type: AuthActions.END_LOADING,
-        });
-      }
-    },
-  });
+      authDispatch({
+        type: AuthActions.SET_ERROR,
+        payload: error?.response?.data?.message,
+      });
+    } finally {
+      authDispatch({
+        type: AuthActions.END_LOADING,
+      });
+    }
+  };
 
-  return formik;
+  return handleSubmit;
 };

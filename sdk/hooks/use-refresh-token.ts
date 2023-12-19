@@ -3,10 +3,7 @@ import { AuthActions } from "../constants";
 import { useAuth } from ".";
 
 export const useRefreshToken = () => {
-  const {
-    authDispatch,
-    authStore: { accessToken },
-  } = useAuth();
+  const { authDispatch } = useAuth();
 
   const refresh = async () => {
     try {
@@ -16,10 +13,13 @@ export const useRefreshToken = () => {
 
       const token: string = data?.data?.accessToken;
 
-      console.log("[OLD TOKEN]: ", accessToken);
-      console.log("[NEW TOKEN]: ", token);
-
-      authDispatch({ type: AuthActions.SET_TOKEN, payload: token });
+      authDispatch({
+        type: AuthActions.SET_AUTH,
+        payload: {
+          profile: data?.data?.user,
+          token,
+        },
+      });
 
       return token;
     } catch (error) {

@@ -1,25 +1,30 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { ArrowRightCircle, Loader2, Mail } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
-import { cn } from "@/lib/utils";
 
 import { useAuth, useAuthForms } from "../../../../../sdk";
 
 import { useEmailForm } from "../lib";
 
 export const EmailForm = () => {
+  const [email, setEmail] = useState("");
+
   const {
     authStore: {
       state: { loading },
     },
   } = useAuth();
 
-  const formik = useEmailForm();
+  const handleSubmit = useEmailForm();
   const toggleForm = useAuthForms((state) => state.setActiveForm);
 
   return (
-    <form className="my-4 p-4 flex flex-col" onSubmit={formik.handleSubmit}>
+    <form
+      className="my-4 p-4 flex flex-col"
+      onSubmit={(e) => handleSubmit(e, email)}
+    >
       <small className="text-center text-slate-200 mb-4">
         Please enter your email address. We will send you an email with a code
         to reset your password.
@@ -33,18 +38,17 @@ export const EmailForm = () => {
           type="email"
           name="email"
           autoComplete="on"
-          className={cn(
-            "w-full p-2 text-sm border-none bg-transparent outline-none text-white backdrop-blur-[4px]",
-            formik.touched.email && formik.errors.email && "ring-2 ring-red-800"
-          )}
+          className={
+            "w-full p-2 text-sm border-none bg-transparent outline-none text-white backdrop-blur-[4px]"
+          }
           placeholder="Email@example.com"
           required
           aria-required
-          value={formik.values.email}
-          onChange={formik.handleChange}
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
         />
       </p>
-      <div className="flex justify-between items-center my-4 mb-2">
+      <div className="flex flex-col sm:flex-row justify-between items-center my-4 mb-2 gap-4">
         <p className="text-white text-[12px] space-x-2">
           <span>Already have an account?</span>
           <Button

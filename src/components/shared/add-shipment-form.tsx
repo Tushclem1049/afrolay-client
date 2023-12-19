@@ -17,7 +17,7 @@ import {
   useAddShipForm,
   useShipmentInputsValidation,
 } from "../../../sdk";
-import toast from "react-hot-toast";
+import { toast } from "sonner";
 
 const AddShipmentForm = () => {
   const {

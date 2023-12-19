@@ -35,7 +35,7 @@ export const useAxiosPrivate = () => {
     );
 
     return () => {
-      // Remove interceptors to avoid memory leaks and unwanted app behaviours
+      /** Remove interceptors to avoid memory leaks and unwanted app behaviours*/
       axiosPrivate.interceptors.request.eject(requestInterceptor);
       axiosPrivate.interceptors.response.eject(responseInterceptor);
     };
