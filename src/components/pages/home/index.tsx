@@ -11,7 +11,7 @@ const HomePage = () => {
         <Logo />
       </div>
       <Link to={"/sign-in"}>
-        <div className="px-8 py-2 sm:py-4 font-medium rounded-full bg-transparent border-4 border-orange-400 sm:border-orange-500 backdrop-blur-xl shadow-2xl text-xl text-white">
+        <div className="px-8 py-2 sm:py-4 font-medium rounded-full bg-transparent border-[3px] sm:border-4 border-orange-400 sm:border-orange-500 backdrop-blur-xl shadow-2xl text-xl text-white">
           Get Started!
         </div>
       </Link>
