@@ -1,11 +1,18 @@
 import { Outlet } from "react-router-dom";
-import { Toaster } from "sonner";
+import { NavBar, SideBar } from "..";
 
 const DashBoardLayout = () => {
   return (
-    <div>
-      <Toaster expand={true} closeButton={true} position="top-center" />
-      <Outlet />
+    <div className="h-full w-full">
+      <div className="hidden md:flex h-full w-56 flex-col fixed inset-y-0 z-50">
+        <SideBar />
+      </div>
+      <div className="h-[64px] md:pl-56 fixed inset-y-0 w-full z-50">
+        <NavBar />
+      </div>
+      <div className="md:pl-56 pt-[64px] h-full">
+        <Outlet />
+      </div>
     </div>
   );
 };

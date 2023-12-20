@@ -32,6 +32,7 @@ function App() {
                   element={<_.EditShipmentPage />}
                 />
                 <Route path="checkout-details" element={<_.CheckoutPage />} />
+                <Route path="profile" element={<_.ProfilePage />} />
               </Route>
             </Route>
           </Route>

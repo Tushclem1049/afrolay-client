@@ -7,3 +7,4 @@ export { default as ResetPasswordPage } from "./reset-password";
 export { default as ShipmentPage } from "./shipments";
 export { default as SignInPage } from "./sign-in";
 export { default as ForgotPassword } from "./forgot-password";
+export { default as ProfilePage } from "./profile";

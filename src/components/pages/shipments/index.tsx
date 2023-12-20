@@ -19,7 +19,9 @@ const ShipmentPage = () => {
     <div>
       shipmentPage
       <div>
-        <Button onClick={logout}>Logout</Button>
+        <Button disabled onClick={logout}>
+          Logout
+        </Button>
       </div>
     </div>
   );

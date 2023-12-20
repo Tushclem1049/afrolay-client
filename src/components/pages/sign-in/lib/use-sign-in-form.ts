@@ -43,7 +43,7 @@ export const useSignInForm = () => {
 
         fn.resetForm();
         // redirect to dashboard
-        navigate(from, { preventScrollReset: true, replace: true });
+        navigate(from, { preventScrollReset: true });
       } catch (error: any) {
         toast.error(error?.response?.data?.message);
 

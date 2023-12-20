@@ -22,6 +22,7 @@ export const PersistLogin = () => {
   const refresh = useRefreshToken();
   const {
     authStore: { accessToken },
+    persistLogin,
   } = useAuth();
 
   useEffect(() => {
@@ -36,5 +37,9 @@ export const PersistLogin = () => {
     !accessToken ? verifyRefreshToken() : setIsLoading(false);
   }, [refresh, accessToken]);
 
-  return <>{isLoading ? <p>Loading...</p> : <Outlet />}</>;
+  return (
+    <>
+      {!persistLogin ? <Outlet /> : isLoading ? <p>Loading...</p> : <Outlet />}
+    </>
+  );
 };
