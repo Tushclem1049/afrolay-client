@@ -117,6 +117,8 @@ const ProfilePage = () => {
                 onChange={(e) => handleChange(e)}
                 name="username"
                 autoComplete="on"
+                required
+                aria-aria-required
               />
             </p>
             <p className="w-full sm:w-1/2">
@@ -128,6 +130,8 @@ const ProfilePage = () => {
                 onChange={(e) => handleChange(e)}
                 name="email"
                 autoComplete="on"
+                required
+                aria-aria-required
               />
             </p>
           </div>
