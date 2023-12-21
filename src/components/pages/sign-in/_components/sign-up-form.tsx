@@ -101,7 +101,6 @@ export const SignUpForm = () => {
 
           <input
             type="password"
-            name="newPassword"
             className={cn(
               "w-full p-2 text-sm border-none bg-transparent outline-none select-none",
               formik.touched.newPassword &&
@@ -110,9 +109,8 @@ export const SignUpForm = () => {
             )}
             placeholder="New password"
             ref={passwordInputRef}
-            value={formik.values.newPassword}
-            onChange={formik.handleChange}
-            autoFocus
+            {...formik.getFieldProps("newPassword")}
+            disabled={false}
           />
         </p>
       </div>
@@ -134,7 +132,6 @@ export const SignUpForm = () => {
 
           <input
             type="password"
-            name="confirmPassword"
             className={cn(
               "w-full p-2 text-sm border-none bg-transparent outline-none select-none",
               formik.touched.confirmPassword &&
@@ -143,8 +140,8 @@ export const SignUpForm = () => {
             )}
             placeholder="Confirm password"
             ref={cPasswordInputRef}
-            value={formik.values.confirmPassword}
-            onChange={formik.handleChange}
+            {...formik.getFieldProps("confirmPassword")}
+            disabled={false}
           />
         </p>
       </div>
