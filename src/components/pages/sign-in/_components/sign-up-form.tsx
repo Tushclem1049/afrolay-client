@@ -102,7 +102,6 @@ export const SignUpForm = () => {
           <input
             type="password"
             name="newPassword"
-            autoComplete="on"
             className={cn(
               "w-full p-2 text-sm border-none bg-transparent outline-none select-none",
               formik.touched.newPassword &&
@@ -137,7 +136,6 @@ export const SignUpForm = () => {
           <input
             type="password"
             name="confirmPassword"
-            autoComplete="on"
             className={cn(
               "w-full p-2 text-sm border-none bg-transparent outline-none select-none",
               formik.touched.confirmPassword &&
