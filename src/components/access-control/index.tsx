@@ -10,7 +10,7 @@ export const RequireAuth = () => {
 
   const location = useLocation();
 
-  return true ? (
+  return authenticated ? (
     <Outlet />
   ) : (
     <Navigate to="sign-in" state={{ from: location }} replace />
