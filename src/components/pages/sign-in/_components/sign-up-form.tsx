@@ -105,6 +105,7 @@ export const SignUpForm = () => {
           ref={passwordInputRef}
           value={formik.values.newPassword}
           onChange={formik.handleChange}
+          autoComplete="new-password"
         />
       </p>
       <p className="relative bg-slate-100 pr-10">
@@ -135,6 +136,7 @@ export const SignUpForm = () => {
           ref={cPasswordInputRef}
           value={formik.values.confirmPassword}
           onChange={formik.handleChange}
+          autoComplete="new-password"
         />
       </p>
       <div>
