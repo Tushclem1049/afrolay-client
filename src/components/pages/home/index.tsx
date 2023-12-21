@@ -5,7 +5,7 @@ import { Logo } from "@/components";
 const HomePage = () => {
   return (
     <div
-      className="h-screen w-full bg-cover bg-center bg-no-repeat flex justify-center items-center flex-col"
+      className="h-screen w-full bg-cover bg-center bg-sky-600 bg-no-repeat flex justify-center items-center flex-col"
       style={{ backgroundImage: 'url("bg-02.jpg")' }}
     >
       <div className="fixed top-0 w-full py-4 px-4 sm:px-12">
