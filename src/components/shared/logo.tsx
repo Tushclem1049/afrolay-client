@@ -6,7 +6,7 @@ export const Logo = () => {
       to={"/"}
       className="focus:ring-none focus-visible:ring-none outline-none w-fit"
     >
-      <div className="hover:opacity-75">
+      <div className="hover:opacity-75 max-w-fit">
         <img src="/logo-01.png" alt="logo" className="h-[50px] w-auto" />
       </div>
     </Link>

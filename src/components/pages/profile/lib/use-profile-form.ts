@@ -55,17 +55,12 @@ export const useProfileForm = () => {
       avatar,
     } = value;
 
-    let payload: Partial<ProfileFormPayload> = {
-      username,
-      email,
-    };
+    const formData = new FormData();
 
-    if (oldPassword?.trim()) {
-      payload = {
-        ...payload,
-        oldPassword: oldPassword,
-      };
-    }
+    formData.append("email", email);
+    formData.append("username", username);
+
+    oldPassword?.trim() && formData.append("oldPassword", oldPassword);
 
     if (newPassword?.trim()) {
       if (!confirmPassword?.trim()) {
@@ -73,43 +68,28 @@ export const useProfileForm = () => {
       }
     }
 
-    if (newPassword?.trim()) {
-      payload = {
-        ...payload,
-        newPassword: newPassword,
-      };
-    }
+    newPassword?.trim() && formData.append("newPassword", newPassword);
 
-    if (confirmPassword?.trim()) {
-      payload = {
-        ...payload,
-        confirmPassword: confirmPassword,
-      };
-    }
+    confirmPassword?.trim() &&
+      formData.append("confirmPassword", confirmPassword);
 
-    if (value.avatar instanceof File) {
-      payload = {
-        ...payload,
-        avatar: avatar as File,
-      };
-    }
-
-    console.log(payload);
+    value.avatar instanceof File && formData.append("avatar", avatar);
+    console.log(Object.fromEntries(formData.entries()));
 
     /** Handle form submission */
     authDispatch({ type: AuthActions.START_LOADING });
 
     try {
-      const { data } = await axiosPrivate.patch("/user", payload, {
+      const { data } = await axiosPrivate.patch("/user", formData, {
+        headers: {
+          "Content-Type": "multi-part/form-data",
+        },
         withCredentials: true,
       });
 
       authDispatch({
-        type: AuthActions.SET_AUTH,
-        payload: {
-          profile: data?.data?.user,
-          token: data?.data?.accessToken,
-        },
+        type: AuthActions.SET_AUTH_PROFILE,
+        payload: data?.data?.user,
       });
       toast.success(data?.message);
     } catch (error: any) {

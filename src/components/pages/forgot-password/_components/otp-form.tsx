@@ -68,10 +68,11 @@ export const OtpForm = () => {
 
   return (
     <form
-      className="my-4 p-4 flex flex-col"
+      className="my-4 p-4 flex flex-col gap-y-4"
       onSubmit={(e) => handleSubmit(e, otp)}
+      style={{ gap: "1rem", rowGap: "1rem" }}
     >
-      <small className="text-center text-slate-200 mb-4">
+      <small className="text-center text-slate-200 mb-2">
         {message || "Enter the 6 digit OTP that was sent to your email"}
       </small>
       <div className="overflow-x-auto p-1 w-full">
@@ -81,8 +82,8 @@ export const OtpForm = () => {
           numInputs={6}
           containerStyle="flex justify-center gap-3 items-center w-full"
           inputStyle={{
-            width: "2.4em",
-            height: "2.4em",
+            width: "2.2em",
+            height: "2.2em",
             fontSize: "1.3em",
             fontWeight: "400",
             background: "none",
@@ -105,7 +106,7 @@ export const OtpForm = () => {
         </Button>
       </div>
 
-      <div className="mt-3 flex gap-2 items-center justify-between">
+      <div className="flex gap-2 items-center justify-between">
         <span
           className="text-muted/60 text-[12px] hover:no-underline flex items-center font-medium"
           role="button"

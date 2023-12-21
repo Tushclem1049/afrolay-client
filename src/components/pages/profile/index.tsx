@@ -74,7 +74,15 @@ const ProfilePage = () => {
   if (!isMounted) return null;
   return (
     <div className="p-10 pt-20">
-      <div className="mx-auto max-w-[620px] p-2">
+      <form
+        className="mx-auto max-w-[620px] p-2"
+        onSubmit={(e) =>
+          handleSubmit(e, {
+            ...profile,
+            avatar: canceled ? profile.avatar : file,
+          })
+        }
+      >
         <div className="flex justify-center flex-col gap-y-4 items-center">
           <ToolTip
             description="Click to select or drag and drop a photo here. Tips: Images only, 5MB max size."
@@ -105,15 +113,7 @@ const ProfilePage = () => {
           </div>
         </div>
 
-        <form
-          className="mt-14 flex flex-col gap-y-10"
-          onSubmit={(e) =>
-            handleSubmit(e, {
-              ...profile,
-              avatar: canceled ? profile.avatar : file,
-            })
-          }
-        >
+        <div className="mt-14 flex flex-col gap-y-10">
           <div className="flex w-full flex-col sm:flex-row gap-x-14 gap-y-4">
             <p className="w-full sm:w-1/2">
               <input
@@ -200,8 +200,8 @@ const ProfilePage = () => {
               )}
             </Button>
           </div>
-        </form>
-      </div>
+        </div>
+      </form>
     </div>
   );
 };

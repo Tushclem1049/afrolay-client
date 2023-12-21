@@ -35,7 +35,11 @@ export const SignUpForm = () => {
   const setActiveTab = useAuthForms((state) => state.setactiveFormTab);
 
   return (
-    <form className="flex flex-col gap-y-4" onSubmit={formik.handleSubmit}>
+    <form
+      className="flex flex-col gap-y-4"
+      onSubmit={formik.handleSubmit}
+      style={{ gap: "1rem", rowGap: "1rem" }}
+    >
       <p className="relative bg-slate-100 pr-10">
         <span className="absolute right-0 bottom-1/2 transform translate-y-1/2 grid place-items-center w-10 bg-orange-400 h-full">
           <User2 className="text-white w-5 h-5" />
@@ -106,6 +110,8 @@ export const SignUpForm = () => {
           value={formik.values.newPassword}
           onChange={formik.handleChange}
           autoComplete="new-password"
+          required
+          aria-required
         />
       </p>
       <p className="relative bg-slate-100 pr-10">
@@ -137,6 +143,8 @@ export const SignUpForm = () => {
           value={formik.values.confirmPassword}
           onChange={formik.handleChange}
           autoComplete="new-password"
+          aria-required
+          required
         />
       </p>
       <div>

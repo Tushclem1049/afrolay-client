@@ -22,8 +22,9 @@ export const EmailForm = () => {
 
   return (
     <form
-      className="my-4 p-4 flex flex-col"
+      className="my-4 p-4 flex flex-col gap-y-4"
       onSubmit={(e) => handleSubmit(e, email)}
+      style={{ gap: "1rem", rowGap: "1rem" }}
     >
       <small className="text-center text-slate-200 mb-4">
         Please enter your email address. We will send you an email with a code
@@ -48,7 +49,7 @@ export const EmailForm = () => {
           onChange={(e) => setEmail(e.target.value)}
         />
       </p>
-      <div className="flex flex-col sm:flex-row justify-between items-center my-4 mb-2 gap-4">
+      <div className="flex flex-col sm:flex-row justify-between items-center gap-4">
         <p className="text-white text-[12px] space-x-2">
           <span>Already have an account?</span>
           <Button
@@ -71,7 +72,7 @@ export const EmailForm = () => {
           </span>
         </p>
       </div>
-      <div className="mt-4">
+      <div className="mt-2">
         <Button
           className="w-full rounded-none bg-orange-400/80 hover:bg-orange-400/90 disabled:cursor-not-allowed disabled:bg-orange-400"
           disabled={loading}

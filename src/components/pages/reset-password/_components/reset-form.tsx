@@ -38,6 +38,7 @@ export const ResetForm = () => {
     <form
       className="my-4 p-4 flex flex-col gap-4"
       onSubmit={formik.handleSubmit}
+      style={{ gap: "1rem", rowGap: "1rem" }}
     >
       <div>
         <p className="relative bg-slate-100 pr-10">
