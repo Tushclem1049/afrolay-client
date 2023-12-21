@@ -112,6 +112,7 @@ export const SignUpForm = () => {
             ref={passwordInputRef}
             value={formik.values.newPassword}
             onChange={formik.handleChange}
+            autoFocus
           />
         </p>
       </div>
