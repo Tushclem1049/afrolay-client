@@ -45,7 +45,9 @@ export const validateSignUp = (values: SignUpValues) => {
     errors.email = toast.error("Invalid email address") as string;
   }
 
-  if (values.newPassword.length < 6) {
+  if (!values.newPassword.trim()) {
+    errors.newPassword = toast.error("Please choose a password") as string;
+  } else if (values.newPassword.length < 6) {
     errors.newPassword = toast.error(
       "Password must have at least six characters"
     ) as string;

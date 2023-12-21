@@ -35,116 +35,108 @@ export const SignUpForm = () => {
   const setActiveTab = useAuthForms((state) => state.setactiveFormTab);
 
   return (
-    <form className="flex flex-col gap-4" onSubmit={formik.handleSubmit}>
-      <div>
-        <p className="relative bg-slate-100 pr-10">
-          <span className="absolute right-0 bottom-1/2 transform translate-y-1/2 grid place-items-center w-10 bg-orange-400 h-full">
-            <User2 className="text-white w-5 h-5" />
-          </span>
-          <input
-            type="username"
-            name="username"
-            autoComplete="on"
-            className={cn(
-              "w-full p-2 text-sm border-none bg-transparent outline-none",
-              formik.touched.username &&
-                formik.errors.username &&
-                "ring-2 ring-red-800"
-            )}
-            placeholder="Username"
-            required
-            aria-required
-            value={formik.values.username}
-            onChange={formik.handleChange}
-          />
-        </p>
-      </div>
-      <div>
-        <p className="relative bg-slate-100 pr-10">
-          <span className="absolute right-0 bottom-1/2 transform translate-y-1/2 grid place-items-center w-10 bg-orange-400 h-full">
-            <Mail className="text-white w-5 h-5" />
-          </span>
-          <input
-            type="email"
-            name="email"
-            id="email"
-            autoComplete="on"
-            className={cn(
-              "w-full p-2 text-sm border-none bg-transparent outline-none",
-              formik.touched.email &&
-                formik.errors.email &&
-                "ring-2 ring-red-800"
-            )}
-            placeholder="Email@example.com"
-            required
-            aria-required
-            value={formik.values.email}
-            onChange={formik.handleChange}
-          />
-        </p>
-      </div>
-      <div>
-        <p className="relative bg-slate-100 pr-10">
-          <span className="absolute right-0 bottom-1/2 transform translate-y-1/2 grid place-items-center w-10 bg-orange-400 h-full">
-            {isVisible.nP ? (
-              <EyeOff
-                className="text-white w-5 h-5 cursor-pointer"
-                onClick={() => toggleVisibility("nP")}
-              />
-            ) : (
-              <Lock
-                className="text-white w-5 h-5 cursor-pointer"
-                onClick={() => toggleVisibility("nP")}
-              />
-            )}
-          </span>
+    <form className="flex flex-col gap-y-4" onSubmit={formik.handleSubmit}>
+      <p className="relative bg-slate-100 pr-10">
+        <span className="absolute right-0 bottom-1/2 transform translate-y-1/2 grid place-items-center w-10 bg-orange-400 h-full">
+          <User2 className="text-white w-5 h-5" />
+        </span>
+        <input
+          type="username"
+          name="username"
+          autoComplete="on"
+          className={cn(
+            "w-full p-2 text-sm border-none bg-transparent outline-none",
+            formik.touched.username &&
+              formik.errors.username &&
+              "ring-2 ring-red-800"
+          )}
+          placeholder="Username"
+          required
+          aria-required
+          value={formik.values.username}
+          onChange={formik.handleChange}
+        />
+      </p>
+      <p className="relative bg-slate-100 pr-10">
+        <span className="absolute right-0 bottom-1/2 transform translate-y-1/2 grid place-items-center w-10 bg-orange-400 h-full">
+          <Mail className="text-white w-5 h-5" />
+        </span>
+        <input
+          type="email"
+          name="email"
+          id="email"
+          autoComplete="on"
+          className={cn(
+            "w-full p-2 text-sm border-none bg-transparent outline-none",
+            formik.touched.email && formik.errors.email && "ring-2 ring-red-800"
+          )}
+          placeholder="Email@example.com"
+          required
+          aria-required
+          value={formik.values.email}
+          onChange={formik.handleChange}
+        />
+      </p>
+      <p className="relative bg-slate-100 pr-10">
+        <span className="absolute right-0 bottom-1/2 transform translate-y-1/2 grid place-items-center w-10 bg-orange-400 h-full">
+          {isVisible.nP ? (
+            <EyeOff
+              className="text-white w-5 h-5 cursor-pointer"
+              onClick={() => toggleVisibility("nP")}
+            />
+          ) : (
+            <Lock
+              className="text-white w-5 h-5 cursor-pointer"
+              onClick={() => toggleVisibility("nP")}
+            />
+          )}
+        </span>
 
-          <input
-            type="password"
-            className={cn(
-              "w-full p-2 text-sm border-none bg-transparent outline-none select-none",
-              formik.touched.newPassword &&
-                formik.errors.newPassword &&
-                "ring-2 ring-red-800"
-            )}
-            placeholder="New password"
-            ref={passwordInputRef}
-            {...formik.getFieldProps("newPassword")}
-            disabled={false}
-          />
-        </p>
-      </div>
-      <div>
-        <p className="relative bg-slate-100 pr-10">
-          <span className="absolute right-0 bottom-1/2 transform translate-y-1/2 grid place-items-center w-10 bg-orange-400 h-full">
-            {isVisible.cP ? (
-              <EyeOff
-                className="text-white w-5 h-5 cursor-pointer"
-                onClick={() => toggleVisibility("cP")}
-              />
-            ) : (
-              <Eye
-                className="text-white w-5 h-5 cursor-pointer"
-                onClick={() => toggleVisibility("cP")}
-              />
-            )}
-          </span>
+        <input
+          type="password"
+          name="newPassword"
+          className={cn(
+            "w-full p-2 text-sm border-none bg-transparent outline-none select-none",
+            formik.touched.newPassword &&
+              formik.errors.newPassword &&
+              "ring-2 ring-red-800"
+          )}
+          placeholder="New password"
+          ref={passwordInputRef}
+          value={formik.values.newPassword}
+          onChange={formik.handleChange}
+        />
+      </p>
+      <p className="relative bg-slate-100 pr-10">
+        <span className="absolute right-0 bottom-1/2 transform translate-y-1/2 grid place-items-center w-10 bg-orange-400 h-full">
+          {isVisible.cP ? (
+            <EyeOff
+              className="text-white w-5 h-5 cursor-pointer"
+              onClick={() => toggleVisibility("cP")}
+            />
+          ) : (
+            <Eye
+              className="text-white w-5 h-5 cursor-pointer"
+              onClick={() => toggleVisibility("cP")}
+            />
+          )}
+        </span>
 
-          <input
-            type="password"
-            className={cn(
-              "w-full p-2 text-sm border-none bg-transparent outline-none select-none",
-              formik.touched.confirmPassword &&
-                formik.errors.confirmPassword &&
-                "ring-2 ring-red-800"
-            )}
-            placeholder="Confirm password"
-            ref={cPasswordInputRef}
-            {...formik.getFieldProps("confirmPassword")}
-            disabled={false}
-          />
-        </p>
-      </div>
+        <input
+          type="password"
+          name="confirmPassword"
+          className={cn(
+            "w-full p-2 text-sm border-none bg-transparent outline-none select-none",
+            formik.touched.confirmPassword &&
+              formik.errors.confirmPassword &&
+              "ring-2 ring-red-800"
+          )}
+          placeholder="Confirm password"
+          ref={cPasswordInputRef}
+          value={formik.values.confirmPassword}
+          onChange={formik.handleChange}
+        />
+      </p>
       <div>
         <p className="text-white text-[13px] flex space-x-2">
           <span>Already have an account?</span>
