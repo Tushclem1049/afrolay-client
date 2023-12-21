@@ -28,8 +28,6 @@ export const authReducer = (authState: TAuth, action: TAuthAction): TAuth => {
       };
 
     case AuthActions.SET_AUTH_PROFILE:
-      if (!payload) alert("Provide a valid auth data");
-
       return {
         ...authState,
         authProfile: payload,
