@@ -33,7 +33,9 @@ export function PropfilePopover({
 
   return (
     <Popover>
-      <PopoverTrigger asChild>{children}</PopoverTrigger>
+      <PopoverTrigger asChild className="max-w-fit">
+        {children}
+      </PopoverTrigger>
       <PopoverContent
         className="w-64 pt-3"
         align={align}

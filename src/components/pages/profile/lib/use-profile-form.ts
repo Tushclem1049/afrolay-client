@@ -34,18 +34,18 @@ export const useProfileForm = () => {
       return toast.error("Username should have atleast three characters");
     }
 
-    if (!value.newPassword?.trim()) {
-      return toast.error("Please choose a password");
-    } else if (value.newPassword.length < 6) {
-      return toast.error("Password must have at least six characters");
-    } else if (
-      !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/.test(value.newPassword)
-    ) {
-      return toast.error(
-        "At least one number, a symbol, uppercase and lowercase letters are required."
-      );
-    } else if (value.newPassword !== value.confirmPassword) {
-      return toast.error("Passwords do not match");
+    if (value.newPassword?.trim()) {
+      if (value.newPassword.length < 6) {
+        return toast.error("Password must have at least six characters");
+      } else if (
+        !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{6,}$/.test(value.newPassword)
+      ) {
+        return toast.error(
+          "At least one number, a symbol, uppercase and lowercase letters are required."
+        );
+      } else if (value.newPassword !== value.confirmPassword) {
+        return toast.error("Passwords do not match");
+      }
     }
 
     const {
@@ -60,10 +60,34 @@ export const useProfileForm = () => {
     let payload: Partial<ProfileFormPayload> = {
       username,
       email,
-      oldPassword,
-      newPassword,
-      confirmPassword,
     };
+
+    if (oldPassword?.trim()) {
+      payload = {
+        ...payload,
+        oldPassword: oldPassword,
+      };
+    }
+
+    if (newPassword?.trim()) {
+      if (!confirmPassword?.trim()) {
+        return toast.error("Please confirm your new password");
+      }
+    }
+
+    if (newPassword?.trim()) {
+      payload = {
+        ...payload,
+        newPassword: newPassword,
+      };
+    }
+
+    if (confirmPassword?.trim()) {
+      payload = {
+        ...payload,
+        confirmPassword: confirmPassword,
+      };
+    }
 
     if (value.avatar instanceof File) {
       payload = {
