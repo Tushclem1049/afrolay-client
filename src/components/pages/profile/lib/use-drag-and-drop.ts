@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useDropzone } from "react-dropzone";
 
 export const useDragAndDrop = () => {
-  const [file, setFile] = useState<File | string>("");
+  const [file, setFile] = useState<File | null>(null);
 
   const fileMaxSize: number = 5000000; //5 megabytes max, 5MB
   const acceptedFileTypes = [

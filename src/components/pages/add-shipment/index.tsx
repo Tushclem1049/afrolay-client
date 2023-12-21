@@ -1,5 +1,11 @@
-const AddShipmentPage = () => {
-  return <div>addShipmentPage</div>;
+import { ShipmentForm } from "./_components/shipment-form";
+
+const AddShipment = () => {
+  return (
+    <div>
+      <ShipmentForm />
+    </div>
+  );
 };
 
-export default AddShipmentPage;
+export default AddShipment;

@@ -98,8 +98,6 @@ export const useProfileForm = () => {
         type: AuthActions.SET_ERROR,
         payload: error?.response?.data?.message,
       });
-    } finally {
-      authDispatch({ type: AuthActions.END_LOADING });
     }
   };
 

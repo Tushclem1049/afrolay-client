@@ -81,8 +81,8 @@ export const OtpForm = () => {
           numInputs={6}
           containerStyle="flex justify-center gap-3 items-center w-full"
           inputStyle={{
-            width: "2.5em",
-            height: "2.5em",
+            width: "2.4em",
+            height: "2.4em",
             fontSize: "1.3em",
             fontWeight: "400",
             background: "none",

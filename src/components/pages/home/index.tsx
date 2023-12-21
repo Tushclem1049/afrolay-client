@@ -1,5 +1,6 @@
-import { Logo } from "@/components";
 import { Link } from "react-router-dom";
+
+import { Logo } from "@/components";
 
 const HomePage = () => {
   return (
