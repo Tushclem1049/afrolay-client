@@ -20,6 +20,7 @@ const ProfilePage = () => {
     authStore: {
       authProfile,
       state: { loading },
+      accessToken,
     },
   } = useAuth();
 
@@ -67,9 +68,7 @@ const ProfilePage = () => {
     setCanceled(true);
   };
 
-  // useEffect(() => {
-  //   console.log(profile);
-  // }, [profile]);
+  useEffect(() => {}, [accessToken, authProfile]);
 
   if (!isMounted) return null;
   return (

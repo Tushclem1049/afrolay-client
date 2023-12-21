@@ -12,8 +12,12 @@ export interface ProfileFormPayload {
   avatar: File | string;
 }
 export const useProfileForm = () => {
-  const { authDispatch } = useAuth();
+  const {
+    authDispatch,
+    authStore: { authProfile, accessToken },
+  } = useAuth();
   const axiosPrivate = useAxiosPrivate();
+  console.log("[AUTH PREUPDATE]: ", authProfile, "  ", accessToken);
 
   const handleSubmit = async (
     e: FormEvent<HTMLFormElement>,
@@ -74,7 +78,6 @@ export const useProfileForm = () => {
       formData.append("confirmPassword", confirmPassword);
 
     value.avatar instanceof File && formData.append("avatar", avatar);
-    console.log(Object.fromEntries(formData.entries()));
 
     /** Handle form submission */
     authDispatch({ type: AuthActions.START_LOADING });
@@ -91,6 +94,7 @@ export const useProfileForm = () => {
         type: AuthActions.SET_AUTH_PROFILE,
         payload: data?.data?.user,
       });
+
       toast.success(data?.message);
     } catch (error: any) {
       toast.error(error?.response?.data?.message);
