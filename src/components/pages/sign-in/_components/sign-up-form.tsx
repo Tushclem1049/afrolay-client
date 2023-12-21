@@ -110,8 +110,6 @@ export const SignUpForm = () => {
             )}
             placeholder="New password"
             ref={passwordInputRef}
-            required
-            aria-required
             value={formik.values.newPassword}
             onChange={formik.handleChange}
           />
@@ -144,8 +142,6 @@ export const SignUpForm = () => {
             )}
             placeholder="Confirm password"
             ref={cPasswordInputRef}
-            required
-            aria-required
             value={formik.values.confirmPassword}
             onChange={formik.handleChange}
           />
