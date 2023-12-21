@@ -42,9 +42,6 @@ export const authReducer = (authState: TAuth, action: TAuthAction): TAuth => {
       };
 
     case AuthActions.SET_AUTH:
-      if (!payload || !payload.profile || !payload.token)
-        alert("Provide 'profile' and 'token' data");
-
       return {
         ...authState,
         authProfile: payload.profile,

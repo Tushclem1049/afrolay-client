@@ -16,12 +16,14 @@ export const NavBar = () => {
             <Clock />
           </div>
           <PropfilePopover>
-            <img
-              src={authProfile.avatar || "/user2.jpg"}
-              alt="avatar"
-              className="w-[46px] h-[46px] rounded-full object-cover"
-              role="button"
-            />
+            <div className="w-[46px] h-[46px] rounded-full shrink-0">
+              <img
+                src={authProfile.avatar || "/user2.jpg"}
+                alt="avatar"
+                className="w-full h-full rounded-full object-cover"
+                role="button"
+              />
+            </div>
           </PropfilePopover>
         </div>
       </div>

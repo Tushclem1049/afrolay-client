@@ -1,5 +1,5 @@
 import { ChangeEvent, useEffect, useState } from "react";
-import { PencilLine } from "lucide-react";
+import { Loader2, PencilLine } from "lucide-react";
 
 import { ToolTip } from "@/components";
 import { Button } from "@/components/ui/button";
@@ -17,7 +17,10 @@ const ProfilePage = () => {
   }, []);
 
   const {
-    authStore: { authProfile },
+    authStore: {
+      authProfile,
+      state: { loading },
+    },
   } = useAuth();
 
   const [imgUrl, setImgUrl] = useState("");
@@ -63,6 +66,10 @@ const ProfilePage = () => {
     setImgUrl("");
     setCanceled(true);
   };
+
+  // useEffect(() => {
+  //   console.log(profile);
+  // }, [profile]);
 
   if (!isMounted) return null;
   return (
@@ -183,10 +190,14 @@ const ProfilePage = () => {
             </Button>
             <Button
               type="submit"
-              className="w-full sm:max-w-[300px] sm:mx-auto bg-orange-600/95 rounded-full disabled:bg-orange-600/75 border-none outline-none focus:ring-2 focus:ring-orange-400/75"
-              // disabled
+              className="w-full sm:max-w-[300px] sm:mx-auto bg-orange-600/95 rounded-full disabled:bg-orange-600/75 border-none outline-none focus:ring-2 focus:ring-orange-400/75 hover:bg-transparent hover:text-black hover:ring-2 hover:ring-orange-400/75"
+              disabled={loading}
             >
-              Save
+              {loading ? (
+                <Loader2 className="animate-spin" />
+              ) : (
+                <span> Save</span>
+              )}
             </Button>
           </div>
         </form>

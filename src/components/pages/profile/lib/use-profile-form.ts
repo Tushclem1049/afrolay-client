@@ -1,4 +1,3 @@
-import { useNavigate } from "react-router-dom";
 import { toast } from "sonner";
 
 import { AuthActions, useAuth, useAxiosPrivate } from "../../../../../sdk";
@@ -14,7 +13,6 @@ export interface ProfileFormPayload {
 }
 export const useProfileForm = () => {
   const { authDispatch } = useAuth();
-  const navigate = useNavigate();
   const axiosPrivate = useAxiosPrivate();
 
   const handleSubmit = async (
@@ -92,16 +90,17 @@ export const useProfileForm = () => {
     if (value.avatar instanceof File) {
       payload = {
         ...payload,
-        avatar: avatar,
+        avatar: avatar as File,
       };
     }
+
+    console.log(payload);
 
     /** Handle form submission */
     authDispatch({ type: AuthActions.START_LOADING });
 
     try {
       const { data } = await axiosPrivate.patch("/user", payload, {
-        headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });
 
@@ -113,8 +112,6 @@ export const useProfileForm = () => {
         },
       });
       toast.success(data?.message);
-
-      navigate("/account/reset-password");
     } catch (error: any) {
       toast.error(error?.response?.data?.message);
 

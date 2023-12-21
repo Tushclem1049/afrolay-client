@@ -33,7 +33,7 @@ export function PropfilePopover({
 
   return (
     <Popover>
-      <PopoverTrigger asChild className="max-w-fit">
+      <PopoverTrigger asChild className="max-w-fit shrink-0">
         {children}
       </PopoverTrigger>
       <PopoverContent
