@@ -55,14 +55,12 @@ export type TShipment = {
   origin: {
     address: {
       addressLocality: string;
-      label: string;
     };
   };
 
   destination: {
     address: {
       addressLocality: string;
-      label: string;
     };
   };
 
@@ -79,7 +77,7 @@ export type TShipment = {
 
     description: string;
 
-    bill?: number;
+    bill?: number | string;
   };
 
   events: TEvents;

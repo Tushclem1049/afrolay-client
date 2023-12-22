@@ -17,7 +17,7 @@ interface PopoverProps {
   sideOffset?: number;
 }
 
-export function PropfilePopover({
+export function ProfilePopover({
   children,
   align,
   side,
@@ -53,6 +53,7 @@ export function PropfilePopover({
           <Button
             className="w-full ring-0 focus:ring-0 focus-visible:ring-0 focus-visible:ring-offset-0 focus:ring-offset-0"
             onClick={signOut}
+            size={"sm"}
           >
             Logout
           </Button>

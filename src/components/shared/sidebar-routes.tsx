@@ -26,7 +26,7 @@ const routes = [
 
 export const SideBarRoutes = () => {
   return (
-    <div className="flex flex-col w-full border-t">
+    <div className="flex flex-col w-full border-t border-orange-300/50">
       {routes.map((route) => (
         <SideBarItem
           key={route.to}

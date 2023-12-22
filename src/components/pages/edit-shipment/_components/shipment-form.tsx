@@ -2,24 +2,30 @@ import { CopyToClipboard } from "react-copy-to-clipboard";
 import { useEffect, useRef, useState } from "react";
 import { countries } from "countries-list";
 import { toast } from "sonner";
+import { useParams } from "react-router-dom";
 import {
   Circle,
   Copy,
   HelpCircle,
   Loader2,
   PackageOpen,
-  RefreshCcw,
   Trash2,
 } from "lucide-react";
 
-import { AddEventModal, ToolTip } from "@/components";
 import { cn } from "@/lib/utils";
 
-import { useAddShipmentForm } from "../lib";
+import { useEditShipmentForm } from "../lib";
 
-import { isEventErrors, useShipmentInputsValidation } from "../../../../../sdk";
+import {
+  TShipment,
+  isEventErrors,
+  resetErrors,
+  useAxiosPrivate,
+  useShipmentInputsValidation,
+} from "../../../../../sdk";
 import { EditEventModal } from "@/components/shared/modals/edit-event-modal";
 import { Button } from "@/components/ui/button";
+import { AddEventModal } from "@/components";
 
 export const ShipmentForm = () => {
   const [isMounted, setIsMounted] = useState(false);
@@ -27,34 +33,79 @@ export const ShipmentForm = () => {
     setIsMounted(true);
   }, []);
 
+  const axios = useAxiosPrivate();
+  const { id } = useParams();
+  const [shipment, setShipment] = useState<TShipment | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    let isMounted = true;
+    const controller = new AbortController();
+
+    const fetchShipment = async () => {
+      setLoading(true);
+      try {
+        const { data } = await axios(`/shipment/${id}`, {
+          withCredentials: true,
+          signal: controller.signal,
+        });
+
+        isMounted && setShipment(data?.data?.shipment);
+      } catch (error: any) {
+        // toast.error(error?.response?.data?.success?.toString());
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchShipment();
+    return () => {
+      isMounted = false;
+      controller.abort();
+    };
+  }, [axios, id]);
+
   const {
     states: {
-      shipment: { belongsTo, destination, events, origin, status, trackingId },
       isSubmitting,
       shipmentEvent,
       whatToDo,
+      shipment: { belongsTo, destination, events, origin, status, trackingId },
     },
     actions: {
       canShipmentBeSubmitted,
-      deleteEvent,
-      handleFormChange,
-      handleShipmentSubmission,
-      toggleMode,
-      refreshNumber,
-      handleEventSubmission,
-      handleShipmentEventChange,
       resetEventModal,
+      deleteEvent,
+      handleEventSubmission,
+      handleFormChange,
+      handleShipmentEventChange,
+      toggleMode,
       setShipmentEvent,
+      handleShipmentUpdate,
     },
-  } = useAddShipmentForm();
+  } = useEditShipmentForm(shipment);
 
-  // List of all countries
+  /** List of all countries */
   const countriesOptions = Object.values(countries).map(
     (country) => country.name
   );
 
   // function and state returned by the hook are used for inputs validation on blur
-  const { handleBlur, shipmentErrors } = useShipmentInputsValidation();
+  const { handleBlur, setShipmentErrors, shipmentErrors } =
+    useShipmentInputsValidation();
+
+  // On mount, enable submit button by resetting errors, given that the form is already prefiled with a payload. It ensures that every field won't need to be blurred/clicked on and validated before all initial errors are reset
+  useEffect(() => {
+    let isMounted = true;
+    if (isMounted) {
+      resetErrors(setShipmentErrors, shipmentErrors);
+    }
+
+    return () => {
+      isMounted = false;
+    };
+    // note: dependency array should remain empty, else an infinite rerendering (maximum update depth warning/error).
+  }, []);
 
   // show the bill input only when shipment status is seized
   const [showBill, setShowBill] = useState<boolean>(false);
@@ -68,14 +119,20 @@ export const ShipmentForm = () => {
     }
   }, [statusRef.current?.value]);
 
-  if (!isMounted) return null;
+  if (loading) {
+    return "please wait...";
+  }
+
+  if (!isMounted) {
+    return null;
+  }
+
   return (
-    <form onSubmit={(e) => handleShipmentSubmission(e)} className="w-full ">
+    <form onSubmit={(e) => handleShipmentUpdate(e)} className="w-full">
       <p className="flex items-center whitespace-nowrap mb-8 text-sm text-slate-600">
         <HelpCircle className="mr-2 h-4 w-4 text-orange-500" /> Shipment must
         have at least one event.
       </p>
-      {/* cdet */}
       <div className="flex flex-col">
         <h1 className="font-bold text-orange-800/95 uppercase text-md">
           Client Details
@@ -89,7 +146,9 @@ export const ShipmentForm = () => {
               className="flex-1 flex flex-col lg:flex-row items-start lg:items-center w-full md:w-1/2 gap-2 text-sm font-medium text-neutral-800 "
               style={{ rowGap: "0.5rem" }}
             >
-              <label htmlFor="name">Full&nbsp;Name:</label>
+              <label htmlFor="name" className="whitespace-nowrap">
+                Full Name:
+              </label>
 
               <input
                 onBlur={(e) => handleBlur(e)}
@@ -121,7 +180,12 @@ export const ShipmentForm = () => {
                 name="email"
                 id="email"
                 value={belongsTo.email}
-                className="w-full p-2 ring-1 outline-none border-none ring-orange-300/50 rounded-full bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/40"
+                className={cn(
+                  "w-full p-2 ring-1 outline-none border-none ring-orange-300/50 rounded-full bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/40 ",
+                  !isEventErrors(shipmentErrors) &&
+                    shipmentErrors.email.showErrorMessage &&
+                    "outline-2 outline-red-400"
+                )}
                 required
                 aria-required
                 onChange={(e) => handleFormChange(e)}
@@ -158,7 +222,6 @@ export const ShipmentForm = () => {
           </div>
         </div>
       </div>
-      {/* cdet */}
 
       {/* shipment details */}
       <div className="flex flex-col">
@@ -167,12 +230,7 @@ export const ShipmentForm = () => {
         </h1>
 
         <div className="bg-orange-700/95 px-4 py-2 flex justify-between items-center border-2 border-amber-500/95">
-          <p className="text-white font-medium text-sm flex items-center gap-x-2">
-            <ToolTip description="Refresh tracking number">
-              <button type="button" onClick={refreshNumber}>
-                <RefreshCcw className="text-amber-300 h-6 w-6" />
-              </button>
-            </ToolTip>
+          <p className="text-white font-medium text-sm">
             Tracking Number: <span>{trackingId}</span>
           </p>
           <CopyToClipboard
@@ -420,7 +478,7 @@ export const ShipmentForm = () => {
           {isSubmitting ? (
             <Loader2 className="animate-spin" />
           ) : (
-            <span> Create Shipment</span>
+            <span> Save Changes</span>
           )}
         </Button>
       </div>

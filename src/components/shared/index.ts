@@ -7,6 +7,7 @@ export * from "./navbar";
 export * from "./clock";
 export * from "./sidebar";
 export * from "./tooltip";
+export * from "./modals";
 export * from "./mobile-sidebar";
 export * from "./sidebar-item";
 export * from "./sidebar-routes";

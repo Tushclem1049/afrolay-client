@@ -1,4 +1,4 @@
-import { Clock, MobileSideBar, PropfilePopover } from ".";
+import { Clock, MobileSideBar, ProfilePopover } from ".";
 import { useAuth } from "../../../sdk";
 
 export const NavBar = () => {
@@ -6,7 +6,7 @@ export const NavBar = () => {
     authStore: { authProfile },
   } = useAuth();
   return (
-    <nav className="p-4 border-b h-full flex items-center bg-white shadow-sm">
+    <nav className="p-4 border-b border-orange-300/50 h-full flex items-center bg-white">
       <div className="items-center flex gap-x-4 justify-between w-full">
         <div className="flex md:hidden">
           <MobileSideBar />
@@ -15,7 +15,7 @@ export const NavBar = () => {
           <div className="hidden sm:block">
             <Clock />
           </div>
-          <PropfilePopover>
+          <ProfilePopover>
             <div className="w-[46px] h-[46px] rounded-full shrink-0">
               <img
                 src={authProfile.avatar || "/user2.jpg"}
@@ -24,7 +24,7 @@ export const NavBar = () => {
                 role="button"
               />
             </div>
-          </PropfilePopover>
+          </ProfilePopover>
         </div>
       </div>
     </nav>

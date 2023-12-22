@@ -19,14 +19,12 @@ export const shipmentInitState: TShipment = {
   origin: {
     address: {
       addressLocality: "",
-      label: "",
     },
   },
 
   destination: {
     address: {
       addressLocality: "",
-      label: "",
     },
   },
 
@@ -43,7 +41,7 @@ export const shipmentInitState: TShipment = {
 
     description: "",
 
-    bill: 0,
+    bill: "",
   },
   events: [],
 };

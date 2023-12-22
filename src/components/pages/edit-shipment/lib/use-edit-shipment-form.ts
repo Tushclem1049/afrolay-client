@@ -5,48 +5,52 @@ import {
   useEffect,
   useState,
 } from "react";
+import { toast } from "sonner";
 
 import {
   ShipmentErrors,
   TEvent,
+  TEvents,
   TShipment,
-  generateRandomNumbers,
+  changeToLocalDatetime,
   shipmentEventInitState,
   shipmentInitState,
   useAxiosPrivate,
   useShipmentInputsValidation,
 } from "../../../../../sdk";
-import { toast } from "sonner";
 
-export const useAddShipmentForm = () => {
+export const useEditShipmentForm = (shipmentPayload: TShipment | null) => {
   const [shipment, setShipment] = useState<TShipment>(shipmentInitState);
   const axios = useAxiosPrivate();
 
-  // When component mounts, generate a new random trackingId number and assign to shipment trackingId prop
   useEffect(() => {
     let isMounted = true;
-    const { code } = generateRandomNumbers(10);
+    /** Before committing shipment to state, reformat time to avoid format descripancies, warnings, and potential bugs. Essentially timestamp format returned from database includes seconds, whereas in the datetime-local input type, the seconds is optional/not-included. So filling such inputs with values that are not supported causes some issues. Example, from datetime-local input type, we return '2023-10-21T15:47' format, whereas, from database, we return ISOString e.g '2023-10-21T15:48:13.959Z' */
+    const formattedShipEvents: TEvents | undefined =
+      shipmentPayload?.events &&
+      shipmentPayload?.events.map((event: TEvent) => {
+        return {
+          ...event,
+          timestamp: changeToLocalDatetime(event.timestamp),
+        };
+      });
 
-    isMounted &&
-      setShipment((prevShipment) => ({
-        ...prevShipment,
-        trackingId: code,
-      }));
+    const formattedShipment: TShipment | null | undefined = shipmentPayload &&
+      formattedShipEvents && {
+        ...shipmentPayload,
+        status: {
+          ...shipmentPayload?.status,
+          timestamp: changeToLocalDatetime(shipmentPayload.status.timestamp),
+        },
+        events: formattedShipEvents,
+      };
+
+    isMounted && formattedShipment && setShipment(formattedShipment);
 
     return () => {
       isMounted = false;
     };
-  }, []);
-
-  // function to refresh or generate new tracking numbers if needed
-  const refreshNumber = () => {
-    const { code } = generateRandomNumbers(10);
-
-    setShipment((prevShipment) => ({
-      ...prevShipment,
-      trackingId: code,
-    }));
-  };
+  }, [shipmentPayload]);
 
   // handle subsequent form change events
   const handleFormChange = (
@@ -258,15 +262,19 @@ export const useAddShipmentForm = () => {
   // const navigate = useNavigate();
 
   // handle form submission
-  const handleShipmentSubmission = async (e: FormEvent<HTMLFormElement>) => {
+  const handleShipmentUpdate = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
     try {
-      const { data } = await axios.post("/shipment", shipment, {
-        headers: { "Content-Type": "application/json" },
-        withCredentials: true,
-      });
+      const { data } = await axios.patch(
+        `/shipment/${shipment?.trackingId}`,
+        shipment,
+        {
+          headers: { "Content-Type": "application/json" },
+          withCredentials: true,
+        }
+      );
       toast.success(data?.message);
     } catch (error: any) {
       toast.error(error?.response?.data?.message);
@@ -289,11 +297,11 @@ export const useAddShipmentForm = () => {
       resetEventModal,
       toggleMode,
       handleEventSubmission,
-      handleShipmentSubmission,
-      refreshNumber,
+      handleShipmentUpdate,
       deleteEvent,
       setShipmentEvent,
       canShipmentBeSubmitted,
+      setShipment,
     },
   };
 };

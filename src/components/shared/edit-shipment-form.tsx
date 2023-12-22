@@ -28,13 +28,13 @@ const EditShipmentForm = ({ shipment }: { shipment: TShipment }) => {
     },
     actions: {
       canShipmentBeSubmitted,
-      // closeModal,
+      // resetEventModal,
       deleteEvent,
       // handleEventSubmission,
       handleFormChange,
       // handleShipmentEventChange,
       handleShipmentUpdate,
-      openModal,
+      toggleMode,
       // setShipmentEvent,
       // setShipment,
     },
@@ -271,7 +271,7 @@ const EditShipmentForm = ({ shipment }: { shipment: TShipment }) => {
                     <button
                       type="button"
                       onClick={() => {
-                        openModal("add");
+                        toggleMode("add");
                       }}
                     >
                       <BsPlusLg />
@@ -294,7 +294,9 @@ const EditShipmentForm = ({ shipment }: { shipment: TShipment }) => {
                             <span>
                               <TbEdit
                                 title="Edit event"
-                                onClick={() => openModal("edit", event.eventId)}
+                                onClick={() =>
+                                  toggleMode("edit", event.eventId)
+                                }
                               />
                             </span>
                             <span>
@@ -475,7 +477,7 @@ const EditShipmentForm = ({ shipment }: { shipment: TShipment }) => {
           {...{
             shipmentEvent,
             whatToDo,
-            closeModal,
+            resetEventModal,
             handleEventSubmission,
             handleShipmentEventChange,
             setShipmentEvent,

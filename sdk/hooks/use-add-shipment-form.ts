@@ -175,13 +175,13 @@ export const useAddShipForm = () => {
   // modal state
   const [isModalOpen, setIsModalOpen] = useState<boolean>(false);
 
-  const closeModal = useCallback(() => {
+  const resetEventModal = useCallback(() => {
     setIsModalOpen(false);
     // clear modal content before closing so that when modal opens again, it doesn't open prefilled with an event data
     setShipmentEvent(shipmentEventInitState);
   }, []);
 
-  const openModal = useCallback(
+  const toggleMode = useCallback(
     (type: "add" | "edit" | undefined, eventId?: string) => {
       const allEvents = shipment.events;
 
@@ -208,7 +208,7 @@ export const useAddShipForm = () => {
         events: [...prevShipment.events, shipmentEvent],
       }));
 
-      closeModal();
+      resetEventModal();
     } else {
       const filteredEvents = shipment.events.filter(
         (event) => event.eventId !== shipmentEvent.eventId
@@ -219,11 +219,11 @@ export const useAddShipForm = () => {
         events: [...filteredEvents, { ...shipmentEvent }],
       }));
 
-      closeModal();
+      resetEventModal();
     }
 
     console.log(shipment.events);
-  }, [closeModal, shipment.events, whatToDo, shipmentEvent]);
+  }, [resetEventModal, shipment.events, whatToDo, shipmentEvent]);
 
   // delete single event
   const deleteEvent = useCallback(
@@ -302,8 +302,8 @@ export const useAddShipForm = () => {
     actions: {
       handleFormChange,
       handleShipmentEventChange,
-      closeModal,
-      openModal,
+      resetEventModal,
+      toggleMode,
       handleEventSubmission,
       handleShipmentSubmission,
       refreshNumber,
