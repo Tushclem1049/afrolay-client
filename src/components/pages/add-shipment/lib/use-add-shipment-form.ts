@@ -261,19 +261,13 @@ export const useAddShipmentForm = () => {
     e.preventDefault();
     setIsSubmitting(true);
 
-    const payload: TShipment = {
-      ...shipment,
-      status: {
-        ...shipment?.status,
-        bill: !shipment.status.bill ? 0 : +shipment.status.bill!,
-      },
-    };
     try {
-      const { data } = await axios.post("/shipment", payload, {
+      const { data } = await axios.post("/shipment", shipment, {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });
       toast.success(data?.message);
+      setShipment(shipmentInitState);
     } catch (error: any) {
       toast.error(error?.response?.data?.message);
     } finally {

@@ -189,11 +189,11 @@ const ProfilePage = () => {
             </Button>
             <Button
               type="submit"
-              className="w-full sm:max-w-[300px] sm:mx-auto bg-orange-600/95 rounded-full border-none outline-none focus:ring-2 focus:ring-orange-400/75 hover:bg-transparent hover:text-black hover:ring-2 hover:ring-orange-400/75"
+              className="w-full sm:max-w-[300px] sm:mx-auto bg-orange-600/95 rounded-full border-none outline-none focus:ring-2 focus:ring-orange-400/75 hover:bg-transparent hover:text-black hover:ring-2 hover:ring-orange-400/75 group"
               disabled={loading}
             >
               {loading ? (
-                <Loader2 className="animate-spin" />
+                <Loader2 className="animate-spin group-hover:text-orange-600/95" />
               ) : (
                 <span> Save</span>
               )}
