@@ -20,7 +20,7 @@ const CheckoutPage = () => {
     const fetchCards = async () => {
       setLoading(true);
       try {
-        const { data } = await axios(`/shipment`, {
+        const { data } = await axios(`/checkout`, {
           withCredentials: true,
           signal: controller.signal,
         });
