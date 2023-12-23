@@ -37,7 +37,7 @@ export function ProfilePopover({
         {children}
       </PopoverTrigger>
       <PopoverContent
-        className="w-64 pt-3"
+        className="w-48 pt-3"
         align={align}
         side={side}
         sideOffset={sideOffset}
@@ -45,8 +45,8 @@ export function ProfilePopover({
         <div className="flex flex-col gap-y-4 pt-1 items-center">
           <Link to={"/dashboard/profile"} className="w-full">
             <p className="flex items-center justify-center">
-              <User2 className="w-5 h-5 mr-2 text-orange-600" />{" "}
-              <span className="font-medium">Edit Profile</span>
+              <User2 className="w-5 h-5 mr-2 text-orange-600" />
+              <span className="font-medium text-sm">Edit Profile</span>
             </p>
           </Link>
 

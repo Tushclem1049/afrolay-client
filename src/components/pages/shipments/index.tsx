@@ -28,7 +28,7 @@ const ShipmentPage = () => {
 
         isMounted && setShipments(data?.data?.allShipment);
       } catch (error: any) {
-        console.log(error?.response?.data);
+        // console.log(error?.response?.data);
       } finally {
         setLoading(false);
       }

@@ -34,7 +34,7 @@ export const ShipmentUI = ({
       </h2>
       <p className="text-sm text-slate-600">
         {shipments?.length
-          ? `You have ${shipments?.length} shipment(s) on your list.`
+          ? `You have ${shipments?.length} active shipment(s) on your list.`
           : "You have no active shipments yet."}
       </p>
 

@@ -77,7 +77,7 @@ export type TShipment = {
 
     description: string;
 
-    bill?: number | string;
+    bill?: number | undefined;
   };
 
   events: TEvents;

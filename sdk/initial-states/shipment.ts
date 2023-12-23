@@ -41,7 +41,7 @@ export const shipmentInitState: TShipment = {
 
     description: "",
 
-    bill: "",
+    bill: undefined,
   },
   events: [],
 };
