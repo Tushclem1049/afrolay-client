@@ -194,7 +194,7 @@ export const ShipmentForm = () => {
             </h1>
 
             {/* add events to this continer */}
-            <div className="flex flex-col gap-y-4">
+            <div className="flex flex-col gap-y-4 p-4">
               <p className="flex-1 flex flex-col  sm:flex-row md:flex-col lg:items-start w-full gap-2 text-sm font-medium text-neutral-800 items-start sm:items-center md:items-start">
                 <label htmlFor="origin" className="whitespace-nowrap">
                   Origin Address:
@@ -302,7 +302,7 @@ export const ShipmentForm = () => {
           </div>
           {/*  */}
           <div
-            className="flex flex-col w-full md:w-1/2 gap-y-4"
+            className="flex flex-col w-full md:w-1/2 gap-y-4 p-4"
             style={{ rowGap: "1rem" }}
           >
             <h1 className="font-bold text-orange-800/95 uppercase text-sm">

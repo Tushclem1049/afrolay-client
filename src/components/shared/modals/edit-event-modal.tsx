@@ -99,7 +99,7 @@ export function EditEventModal(props: {
         resetEventModal={props.resetEventModal}
       >
         <DialogHeader>
-          <DialogTitle>Add Event </DialogTitle>
+          <DialogTitle>Edit Event </DialogTitle>
           <DialogDescription>
             Add to your shipment events here. Click save when you're done.
           </DialogDescription>

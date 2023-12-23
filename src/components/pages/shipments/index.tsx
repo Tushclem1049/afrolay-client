@@ -1,9 +1,7 @@
-import { Link } from "react-router-dom";
 import { useEffect, useState } from "react";
 
-// import { Button } from "@/components/ui/button";
-
 import { TShipments, useAxiosPrivate } from "../../../../sdk";
+import { ShipmentUI } from "./_components/shipment-ui";
 
 const ShipmentPage = () => {
   const axios = useAxiosPrivate();
@@ -28,8 +26,6 @@ const ShipmentPage = () => {
           signal: controller.signal,
         });
 
-        console.log(data);
-
         isMounted && setShipments(data?.data?.allShipment);
       } catch (error: any) {
         console.log(error?.response?.data);
@@ -45,33 +41,18 @@ const ShipmentPage = () => {
     };
   }, [axios]);
 
-  if (!isMounted) {
-    return null;
-  }
-
   if (loading) {
     return "please wait...";
   }
 
-  // if (!shipments?.length) {
-  //   return <p>You have no active shipments yet</p>;
-  // }
+  if (!isMounted) {
+    return null;
+  }
+
   return (
-    <div>
-      shipmentsPage
-      <div>
-        {shipments.map((shipment, i) => {
-          return (
-            <div key={i}>
-              <p>{shipment.trackingId}</p>
-              <p>{shipment.status.status}</p>
-              <p>{shipment.destination.address.addressLocality}</p>
-              <Link to={`/dashboard/shipment/edit/${shipment.trackingId}`}>
-                edit
-              </Link>
-            </div>
-          );
-        })}
+    <div className=" min-h-screen py-12 px-4 sm:px-8 w-full">
+      <div className="md:max-w-screen-lg mx-auto">
+        <ShipmentUI shipments={shipments} setShipments={setShipments} />
       </div>
     </div>
   );
