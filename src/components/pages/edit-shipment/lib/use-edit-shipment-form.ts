@@ -259,17 +259,24 @@ export const useEditShipmentForm = (shipmentPayload: TShipment | null) => {
 
   // form submission state
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  // const navigate = useNavigate();
 
   // handle form submission
   const handleShipmentUpdate = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
+    const payload: TShipment = {
+      ...shipment,
+      status: {
+        ...shipment?.status,
+        bill: !shipment.status.bill ? 0 : +shipment.status.bill!,
+      },
+    };
+
     try {
       const { data } = await axios.patch(
         `/shipment/${shipment?.trackingId}`,
-        shipment,
+        payload,
         {
           headers: { "Content-Type": "application/json" },
           withCredentials: true,

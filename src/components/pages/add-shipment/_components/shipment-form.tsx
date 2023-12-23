@@ -144,6 +144,8 @@ export const ShipmentForm = () => {
                 id="country"
                 className="w-full p-2 ring-1 outline-none border-none ring-orange-300/50 rounded-full bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/40 "
               >
+                <option value="none"></option>
+
                 {countriesOptions.map((country) => (
                   <option key={country} value={country}>
                     {country}

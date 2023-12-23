@@ -255,15 +255,21 @@ export const useAddShipmentForm = () => {
 
   // form submission state
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
-  // const navigate = useNavigate();
 
   // handle form submission
   const handleShipmentSubmission = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setIsSubmitting(true);
 
+    const payload: TShipment = {
+      ...shipment,
+      status: {
+        ...shipment?.status,
+        bill: !shipment.status.bill ? 0 : +shipment.status.bill!,
+      },
+    };
     try {
-      const { data } = await axios.post("/shipment", shipment, {
+      const { data } = await axios.post("/shipment", payload, {
         headers: { "Content-Type": "application/json" },
         withCredentials: true,
       });
