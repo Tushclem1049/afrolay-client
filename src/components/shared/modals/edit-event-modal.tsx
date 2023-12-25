@@ -115,7 +115,7 @@ export function EditEventModal(props: {
               value={props.shipmentEvent.timestamp}
               onChange={(e) => props.handleShipmentEventChange(e)}
               className={cn(
-                "w-full p-2 ring-1 outline-none border border-orange-300/75 max-w-full bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/40 ",
+                "w-full p-2 ring-1 outline-none border border-orange-200/80 max-w-full bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/40 ",
                 isEventErrors(eventErrors) &&
                   eventErrors.timestamp.showErrorMessage &&
                   "outline-2 outline-red-400"
@@ -136,7 +136,7 @@ export function EditEventModal(props: {
               value={props.shipmentEvent.location.address.addressLocality}
               onChange={(e) => props.handleShipmentEventChange(e)}
               className={cn(
-                "w-full p-2 ring-1 outline-none border border-orange-300/75 max-w-full bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/40 ",
+                "w-full p-2 ring-1 outline-none border border-orange-200/80 max-w-full bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/40 ",
                 isEventErrors(eventErrors) &&
                   eventErrors.location.showErrorMessage &&
                   "outline-2 outline-red-400"
@@ -156,7 +156,7 @@ export function EditEventModal(props: {
               value={props.shipmentEvent.description}
               onChange={(e) => props.handleShipmentEventChange(e)}
               className={cn(
-                "w-full p-2 ring-1 outline-none border border-orange-300/75 min-h-[6rem] max-w-full bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/40 ",
+                "w-full p-2 ring-1 outline-none border border-orange-200/80 min-h-[6rem] max-w-full bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/40 ",
                 isEventErrors(eventErrors) &&
                   eventErrors.description.showErrorMessage &&
                   "outline-2 outline-red-400"

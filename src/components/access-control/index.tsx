@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-
 import { Navigate, Outlet, useLocation } from "react-router-dom";
-import { useAuth, useRefreshToken } from "../../../sdk";
 import { Loader } from "lucide-react";
+
+import { useAuth, useRefreshToken } from "../../../sdk";
 
 export const RequireAuth = () => {
   const {

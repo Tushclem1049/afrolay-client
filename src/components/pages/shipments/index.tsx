@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { TShipments, useAxiosPrivate } from "../../../../sdk";
 import { ShipmentUI } from "./_components/shipment-ui";
+import { Loader } from "lucide-react";
 
 const ShipmentPage = () => {
   const axios = useAxiosPrivate();
@@ -42,7 +43,12 @@ const ShipmentPage = () => {
   }, [axios]);
 
   if (loading) {
-    return "please wait...";
+    return (
+      <div className="loader w-full flex flex-col justify-center items-center bg-neutral-100">
+        <Loader className="animate-spin w-8 h-8 text-orange-600" />
+        <span className="text-sm">Please wait...</span>
+      </div>
+    );
   }
 
   if (!isMounted) {

@@ -261,6 +261,7 @@ export const useAddShipmentForm = () => {
   // handle form submission
   const handleShipmentSubmission = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
     setIsSubmitting(true);
 
     try {

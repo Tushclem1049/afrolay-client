@@ -18,7 +18,7 @@ export const NavBar = () => {
           <ProfilePopover>
             <div className="w-[46px] h-[46px] rounded-full shrink-0">
               <img
-                src={authProfile.avatar || "/user2.jpg"}
+                src={authProfile.avatar || "/user1.png"}
                 alt="avatar"
                 className="w-full h-full rounded-full object-cover"
                 role="button"
