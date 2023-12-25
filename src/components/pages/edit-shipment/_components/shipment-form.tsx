@@ -464,7 +464,7 @@ export const ShipmentForm = () => {
                 type="number"
                 name="bill"
                 id="bill"
-                value={status.bill as number}
+                value={status?.bill as number}
                 onChange={(e) => handleFormChange(e)}
                 className="p-2 outline-none border border-orange-200/80 max-w-fit rounded-full bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/75 hide-scroll"
               />
