@@ -5,6 +5,7 @@ import {
   useEffect,
   useState,
 } from "react";
+import { useNavigate } from "react-router-dom";
 
 import {
   ShipmentErrors,
@@ -255,6 +256,7 @@ export const useAddShipmentForm = () => {
 
   // form submission state
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
+  const navigate = useNavigate();
 
   // handle form submission
   const handleShipmentSubmission = async (e: FormEvent<HTMLFormElement>) => {
@@ -268,7 +270,9 @@ export const useAddShipmentForm = () => {
       });
       toast.success(data?.message);
       setShipment(shipmentInitState);
+      navigate("/dashboard/shipment");
     } catch (error: any) {
+      toast.error(error?.response?.data?.data?.validation_error_message);
       toast.error(error?.response?.data?.message);
     } finally {
       setIsSubmitting(false);

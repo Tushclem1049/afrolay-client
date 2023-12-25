@@ -124,7 +124,7 @@ const ProfilePage = () => {
                 name="username"
                 autoComplete="on"
                 required
-                aria-aria-required
+                aria-required
               />
             </p>
             <p className="w-full sm:w-1/2">
@@ -137,7 +137,7 @@ const ProfilePage = () => {
                 name="email"
                 autoComplete="on"
                 required
-                aria-aria-required
+                aria-required
               />
             </p>
           </div>

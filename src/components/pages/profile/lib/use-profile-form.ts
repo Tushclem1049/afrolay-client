@@ -12,12 +12,8 @@ export interface ProfileFormPayload {
   avatar: File | string;
 }
 export const useProfileForm = () => {
-  const {
-    authDispatch,
-    authStore: { authProfile, accessToken },
-  } = useAuth();
+  const { authDispatch } = useAuth();
   const axiosPrivate = useAxiosPrivate();
-  console.log("[AUTH PREUPDATE]: ", authProfile, "  ", accessToken);
 
   const handleSubmit = async (
     e: FormEvent<HTMLFormElement>,

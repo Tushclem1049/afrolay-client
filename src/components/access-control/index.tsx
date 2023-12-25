@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 
 import { Navigate, Outlet, useLocation } from "react-router-dom";
 import { useAuth, useRefreshToken } from "../../../sdk";
+import { Loader } from "lucide-react";
 
 export const RequireAuth = () => {
   const {
@@ -39,7 +40,16 @@ export const PersistLogin = () => {
 
   return (
     <>
-      {!persistLogin ? <Outlet /> : isLoading ? <p>Loading...</p> : <Outlet />}
+      {!persistLogin ? (
+        <Outlet />
+      ) : isLoading ? (
+        <div className="h-screen w-full flex flex-col justify-center items-center bg-neutral-100">
+          <Loader className="animate-spin w-8 h-8 text-orange-600" />
+          <span className="text-sm">Please wait...</span>
+        </div>
+      ) : (
+        <Outlet />
+      )}
     </>
   );
 };

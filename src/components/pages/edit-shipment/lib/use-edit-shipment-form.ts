@@ -276,6 +276,7 @@ export const useEditShipmentForm = (shipmentPayload: TShipment | null) => {
       );
       toast.success(data?.message);
     } catch (error: any) {
+      toast.error(error?.response?.data?.data?.validation_error_message);
       toast.error(error?.response?.data?.message);
     } finally {
       setIsSubmitting(false);
