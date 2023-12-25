@@ -99,7 +99,7 @@ export const ShipmentForm = () => {
                 value={belongsTo.fullName}
                 onChange={(e) => handleFormChange(e)}
                 className={cn(
-                  "w-full p-2 outline-none border border-orange-200/80 rounded-full bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/40 ",
+                  "w-full p-2 outline-none border border-orange-200/80 rounded-full bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/75 ",
                   !isEventErrors(shipmentErrors) &&
                     shipmentErrors.fullName.showErrorMessage &&
                     "outline-2 outline-red-400"
@@ -121,7 +121,7 @@ export const ShipmentForm = () => {
                 name="email"
                 id="email"
                 value={belongsTo.email}
-                className="w-full p-2 outline-none border border-orange-200/80 rounded-full bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/40"
+                className="w-full p-2 outline-none border border-orange-200/80 rounded-full bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/75"
                 required
                 aria-required
                 onChange={(e) => handleFormChange(e)}
@@ -142,7 +142,7 @@ export const ShipmentForm = () => {
                 value={belongsTo.country}
                 name="country"
                 id="country"
-                className="w-full p-2 outline-none border border-orange-200/80 appearance-none rounded-full bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/40 "
+                className="w-full p-2 outline-none border border-orange-200/80 appearance-none rounded-full bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/75 "
               >
                 <option value="none"></option>
 
@@ -210,7 +210,7 @@ export const ShipmentForm = () => {
                   value={origin.address.addressLocality}
                   onChange={(e) => handleFormChange(e)}
                   className={cn(
-                    "w-full p-2 outline-none border border-orange-200/80 rounded-full bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/40 ",
+                    "w-full p-2 outline-none border border-orange-200/80 rounded-full bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/75 ",
                     !isEventErrors(shipmentErrors) &&
                       shipmentErrors.originAddress.showErrorMessage &&
                       "outline-2 outline-red-400"
@@ -234,7 +234,7 @@ export const ShipmentForm = () => {
                   value={destination.address.addressLocality}
                   onChange={(e) => handleFormChange(e)}
                   className={cn(
-                    "w-full p-2 outline-none border border-orange-200/80 rounded-full bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/40 ",
+                    "w-full p-2 outline-none border border-orange-200/80 rounded-full bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/75 ",
                     !isEventErrors(shipmentErrors) &&
                       shipmentErrors.destinationAddress.showErrorMessage &&
                       "outline-2 outline-red-400"
@@ -321,7 +321,7 @@ export const ShipmentForm = () => {
                 value={status.timestamp}
                 onChange={(e) => handleFormChange(e)}
                 className={cn(
-                  "w-full p-2 outline-none border border-orange-200/80 rounded-full appearance-none bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/40 ",
+                  "w-full p-2 outline-none border border-orange-200/80 rounded-full bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/75 ",
                   !isEventErrors(shipmentErrors) &&
                     shipmentErrors.deliveryTimestamp.showErrorMessage &&
                     "outline-2 outline-red-400"
@@ -342,7 +342,7 @@ export const ShipmentForm = () => {
                 value={status.location.address.addressLocality}
                 onChange={(e) => handleFormChange(e)}
                 className={cn(
-                  "w-full p-2 outline-none border border-orange-200/80 rounded-full bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/40 ",
+                  "w-full p-2 outline-none border border-orange-200/80 rounded-full bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/75 ",
                   !isEventErrors(shipmentErrors) &&
                     shipmentErrors.deliveryLocation.showErrorMessage &&
                     "outline-2 outline-red-400"
@@ -362,7 +362,7 @@ export const ShipmentForm = () => {
                 value={status.description}
                 onChange={(e) => handleFormChange(e)}
                 className={cn(
-                  "w-full p-2 outline-none border border-orange-200/80 min-h-[6rem] max-w-full bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/40 ",
+                  "w-full p-2 outline-none border border-orange-200/80 min-h-[6rem] max-w-full bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/75 ",
                   !isEventErrors(shipmentErrors) &&
                     shipmentErrors.deliveryDescription.showErrorMessage &&
                     "outline-2 outline-red-400"
@@ -381,7 +381,7 @@ export const ShipmentForm = () => {
                 onChange={(e) => handleFormChange(e)}
                 value={status.status}
                 ref={statusRef}
-                className="p-2 outline-none border border-orange-200/80 max-w-fit appearance-none rounded-full bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/40"
+                className="p-2 outline-none border border-orange-200/80 max-w-fit appearance-none rounded-full bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/75"
               >
                 <option value="pending">Pending</option>
                 <option value="shipping">Shipping</option>
@@ -404,7 +404,7 @@ export const ShipmentForm = () => {
                 id="bill"
                 value={status.bill as number}
                 onChange={(e) => handleFormChange(e)}
-                className="p-2 outline-none border border-orange-200/80 max-w-fit rounded-full bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/40 hide-scroll"
+                className="p-2 outline-none border border-orange-200/80 max-w-fit rounded-full bg-white text-black focus:ring-2 focus-visible:ring-2 focus:ring-orange-400/75 hide-scroll"
               />
               <strong>$</strong>
             </p>
