@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { Cards, useAxiosPrivate } from "../../../../sdk";
 import { Card } from "./_components/card";
+import { Loader } from "lucide-react";
 
 const CheckoutPage = () => {
   const axios = useAxiosPrivate();
@@ -41,7 +42,12 @@ const CheckoutPage = () => {
   }, [axios]);
 
   if (loading) {
-    return "please wait...";
+    return (
+      <div className="loader md:h-screen w-full flex flex-col justify-center items-center bg-neutral-100">
+        <Loader className="animate-spin w-8 h-8 text-orange-600" />
+        <span className="text-sm">Please wait...</span>
+      </div>
+    );
   }
 
   if (!isMounted) {
