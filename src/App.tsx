@@ -22,26 +22,26 @@ function App() {
         </Route>
 
         {/* protected routes */}
-        {/* <Route element={<_.PersistLogin />}> */}
-        <Route element={<_.RequireAuth />}>
-          <Route element={<_.DashBoardLayout />}>
-            <Route path="/dashboard/shipment" element={<_.ShipmentPage />} />
-            <Route
-              path="/dashboard/shipment/new"
-              element={<_.AddShipmentPage />}
-            />
-            <Route
-              path="/dashboard/shipment/edit/:id"
-              element={<_.EditShipmentPage />}
-            />
-            <Route
-              path="/dashboard/checkout-details"
-              element={<_.CheckoutPage />}
-            />
-            <Route path="/dashboard/profile" element={<_.ProfilePage />} />
+        <Route element={<_.PersistLogin />}>
+          <Route element={<_.RequireAuth />}>
+            <Route element={<_.DashBoardLayout />}>
+              <Route path="/dashboard/shipment" element={<_.ShipmentPage />} />
+              <Route
+                path="/dashboard/shipment/new"
+                element={<_.AddShipmentPage />}
+              />
+              <Route
+                path="/dashboard/shipment/edit/:id"
+                element={<_.EditShipmentPage />}
+              />
+              <Route
+                path="/dashboard/checkout-details"
+                element={<_.CheckoutPage />}
+              />
+              <Route path="/dashboard/profile" element={<_.ProfilePage />} />
+            </Route>
           </Route>
         </Route>
-        {/* </Route> */}
 
         {/* catch-all route*/}
         <Route path="*" element={<_.NotFoundPage />} />
