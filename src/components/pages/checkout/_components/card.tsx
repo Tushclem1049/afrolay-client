@@ -19,11 +19,11 @@ export const Card = (
       const { data } = await axios.delete(`/checkout/${trackingId}`);
       toast.success(data?.message);
 
-      const res = await axios(`/shipment`, {
+      const res = await axios(`/checkout`, {
         withCredentials: true,
       });
 
-      props.setCards(res?.data?.data?.allShipment);
+      props.setCards(res?.data?.data?.allCards);
     } catch (error: any) {
       toast.error(error?.response?.data?.message);
     } finally {

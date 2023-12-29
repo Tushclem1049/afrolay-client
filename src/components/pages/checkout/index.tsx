@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
+import { Loader } from "lucide-react";
+
 import { Cards, useAxiosPrivate } from "../../../../sdk";
 import { Card } from "./_components/card";
-import { Loader } from "lucide-react";
 
 const CheckoutPage = () => {
   const axios = useAxiosPrivate();
@@ -61,10 +62,9 @@ const CheckoutPage = () => {
   return (
     <div className="p-10 py-16">
       <div className="flex flex-col sm:flex-row gap-8 flex-wrap">
-        {cards.length &&
-          cards.map((card) => (
-            <Card {...card} key={card.trackingId} setCards={setCards} />
-          ))}
+        {cards.map((card) => (
+          <Card {...card} key={card.trackingId} setCards={setCards} />
+        ))}
       </div>
     </div>
   );
