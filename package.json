@@ -1,8 +1,8 @@
 {
-  "name": "dhl-dashboard",
+  "name": "afrolay-dashboard",
   "homepage": "https://afrolay.vercel.app",
   "private": true,
-  "version": "0.0.0",
+  "version": "1.0.0",
   "type": "module",
   "scripts": {
     "dev": "vite",
@@ -15,21 +15,18 @@
     "@radix-ui/react-popover": "^1.0.7",
     "@radix-ui/react-slot": "^1.0.2",
     "@radix-ui/react-tooltip": "^1.0.7",
-    "@types/uuid": "^9.0.7",
     "axios": "^1.6.2",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.0.0",
     "countries-list": "^3.0.6",
     "formik": "^2.4.5",
     "lucide-react": "^0.294.0",
-    "moment": "^2.29.4",
     "react": "^18.2.0",
     "react-copy-to-clipboard": "^5.1.0",
     "react-dom": "^18.2.0",
     "react-dropzone": "^14.2.3",
-    "react-icons": "^4.12.0",
     "react-paginate": "^8.2.0",
-    "react-router-dom": "^6.20.1",
+    "react-router-dom": "^6.15.0",
     "react18-input-otp": "^1.1.4",
     "sass": "^1.69.5",
     "sonner": "^1.2.4",
@@ -43,6 +40,7 @@
     "@types/node": "^20.10.3",
     "@types/react": "^18.2.37",
     "@types/react-dom": "^18.2.15",
+    "@types/uuid": "^9.0.7",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
     "@typescript-eslint/parser": "^6.10.0",
     "@vitejs/plugin-react": "^4.2.0",
@@ -53,6 +51,6 @@
     "postcss": "^8.4.32",
     "tailwindcss": "^3.3.5",
     "typescript": "^5.2.2",
-    "vite": "^5.0.0"
+    "vite": "^4.4.5"
   }
 }

@@ -4,25 +4,25 @@ import { Loader } from "lucide-react";
 
 import { useAuth, useRefreshToken } from "../../../sdk";
 
+// export const RequireAuth = () => {
+//   const {
+//     authStore: { accessToken: authenticated },
+//   } = useAuth();
+
+//   const location = useLocation();
+
+//   return authenticated ? (
+//     <Outlet />
+//   ) : (
+//     <Navigate to="/" state={{ from: location }} replace />
+//   );
+// };
+
 export const RequireAuth = () => {
-  const {
-    authStore: { accessToken: authenticated },
-  } = useAuth();
-
-  const location = useLocation();
-
-  return authenticated ? (
-    <Outlet />
-  ) : (
-    <Navigate to="/" state={{ from: location }} replace />
-  );
-};
-
-export const PersistLogin = () => {
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const refresh = useRefreshToken();
   const {
-    authStore: { accessToken },
+    authStore: { accessToken: authenticated },
     persistLogin,
   } = useAuth();
 
@@ -35,8 +35,10 @@ export const PersistLogin = () => {
       }
     };
 
-    !accessToken ? verifyRefreshToken() : setIsLoading(false);
-  }, [refresh, accessToken]);
+    !authenticated ? verifyRefreshToken() : setIsLoading(false);
+  }, [refresh, authenticated]);
+
+  const location = useLocation();
 
   return (
     <>
@@ -47,8 +49,10 @@ export const PersistLogin = () => {
           <Loader className="animate-spin w-8 h-8 text-orange-600" />
           <span className="text-sm">Please wait...</span>
         </div>
-      ) : (
+      ) : authenticated ? (
         <Outlet />
+      ) : (
+        <Navigate to="/" state={{ from: location }} replace />
       )}
     </>
   );
